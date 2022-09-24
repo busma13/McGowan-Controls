@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Binary Upload Boom</title>
+    <title>McGowan Controls</title>
     <link
       rel="icon"
       type="image/png"
@@ -27,10 +27,27 @@
   </head>
   <body>
     <header class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">McGowanControls</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="/portal">Portal <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="/docs">Documentation</a>
+            <a class="nav-item nav-link" href="/jobs">Jobs</a>
+            <a class="nav-item nav-link" href="/priceLists">Price Lists</a>
+            <a class="nav-item nav-link" href="/valveId">Valve Identifier</a>
+            <a class="nav-item nav-link" href="/clock">Time Clock</a>
+            <a class="nav-item nav-link" href="/sizer">O-Ring Sizer</a>
+            <a class="nav-item nav-link" href="/logout">Log Out</a>
+          </div>
+        </div>
+      </nav>
+     
       <div class="text-center">
-        <h1 class=""><a href="/profile">Binary Upload Boom</a></h1>
-        <span>The #100Devs Social Network</span>
+        <h1 class=""><a href="/<%= url %>"><%= pageName %></a></h1>
       </div>
     </header>
-  </body>
-</html>
+

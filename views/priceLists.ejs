@@ -1,0 +1,33 @@
+<%- include('partials/header') -%>
+<div class="container">
+    <div class="row mt-5">
+        <div>
+            <p><strong>Employee</strong>: <%= user.userName %></p>
+            <p><strong>Email</strong>: <%= user.email %></p>
+            <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <ul>
+            <% listItems.forEach( el => { %>
+                    <li class='priceList' data-id='<%= el._id %>'>
+                        <a href="/priceLists/<%= el._id %>?listName=<%= el.listName %>"><span class='priceListName'><%= el.listName %></span></a>
+                        <form action="/priceLists/deletePriceList/<%= el.id %>?_method=DELETE" method="POST" class="col-3">
+                        <button class="btn btn-primary fa fa-trash" type="submit"></button>
+                      </form>
+                    </li>
+            <% }) %>    
+        </ul>
+    </div>
+    <div class="mt-5">
+        <h2>Add a Price List</h2>
+        <form action="/priceLists/createPriceList" method="POST">
+          <div class="mb-3">
+              <label for="newListName" class="form-label">List Name</label>
+              <input type="text" class="form-control" id="newListName" name="newListName">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+</div>
+<%- include('partials/footer') -%>
