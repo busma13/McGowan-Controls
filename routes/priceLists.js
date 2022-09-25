@@ -5,10 +5,14 @@ const { ensureAuth } = require('../middleware/auth')
 
 router.get('/', ensureAuth, priceListsController.getPriceLists)
 
-router.get('/:id', ensureAuth, priceListsController.getSinglePriceList)
+router.get('/:listId', ensureAuth, priceListsController.getSinglePriceList)
 
 router.post('/createPriceList', ensureAuth, priceListsController.createPriceList)
 
-router.delete('/deletePriceList/:id', ensureAuth, priceListsController.deletePriceList)
+router.post('/createPriceListItem/:listId', ensureAuth, priceListsController.createPriceListItem)
+
+router.delete('/deletePriceList/:listId', ensureAuth, priceListsController.deletePriceList)
+
+router.delete('/deletePriceListItem/:listId/:itemId', ensureAuth, priceListsController.deletePriceListItem)
 
 module.exports = router

@@ -10,12 +10,12 @@
     <div class="row mt-5">
         <ul>
             <% listItems.forEach( el => { %>
-                    <li class='priceList' data-id='<%= el._id %>'>
-                        <a href="/priceLists/<%= el._id %>?listName=<%= el.listName %>"><span class='priceListName'><%= el.listName %></span></a>
-                        <form action="/priceLists/deletePriceList/<%= el.id %>?_method=DELETE" method="POST" class="col-3">
+                <li class='priceList' data-id='<%= el._id %>'>
+                    <a href="/priceLists/<%= el._id %>"><span class='priceListName'><%= el.listName %></span></a>
+                    <form action="/priceLists/deletePriceList/<%= el.id %>?_method=DELETE" method="POST" class="col-3">
                         <button class="btn btn-primary fa fa-trash" type="submit"></button>
-                      </form>
-                    </li>
+                    </form>
+                </li>
             <% }) %>    
         </ul>
     </div>

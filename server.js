@@ -8,10 +8,10 @@ const flash = require('express-flash')
 const logger = require('morgan')
 const methodOverride = require("method-override");
 const connectDB = require('./config/database')
+const daisyui = require('daisyui')
 const mainRoutes = require('./routes/main')
 const priceListsRoutes = require('./routes/priceLists')
 const portalRoutes = require('./routes/portal')
-const todoRoutes = require('./routes/todos')
 
 require('dotenv').config({path: './config/.env'})
 
@@ -48,7 +48,6 @@ app.use(flash())
 app.use('/', mainRoutes)
 app.use('/priceLists', priceListsRoutes)
 app.use('/portal', portalRoutes)
-app.use('/todos', todoRoutes)
  
 app.listen(process.env.PORT, ()=>{
     console.log(`Server is running on port ${process.env.PORT}.`)

@@ -14,8 +14,10 @@ module.exports = {
     getSinglePriceList: async (req,res)=>{
         console.log(req.user)
         try{
-            const singleListItems = await PriceListItem.find({priceListId: req.params.id})
-            res.render('singlePriceList.ejs',  { user: req.user, pageName: `Price List - ${req.params.listName}`, url: 'priceLists',listItems: singleListItems }) //change priceLists url
+            const singleListItems = await PriceListItem.find({priceListId: req.params.listId}).sort('itemName')
+            const priceListName = await PriceList.findById(req.params.listId)
+            console.log(singleListItems)
+            res.render('singlePriceList.ejs',  { user: req.user, pageName: `Price List - ${priceListName.listName}`, url: `priceLists/${req.params.listId}`, listItems: singleListItems, listId: req.params.listId }) //change priceLists url
         }catch(err){
             console.log(err)
         }
@@ -30,11 +32,30 @@ module.exports = {
             console.log(err)
         }
     },
+    createPriceListItem: async (req, res)=>{
+        try{
+            console.log(req.body)
+            await PriceListItem.create({ itemName: req.body.itemName, itemPrice: req.body.itemPrice, note: req.body.itemNote, priceListId: req.params.listId })
+            console.log('Price list item has been added!')
+            res.redirect(`/priceLists/${req.params.listId}`)
+        }catch(err){
+            console.log(err)
+        }
+    },
     deletePriceList: async (req, res)=>{
         try{
-            await PriceList.remove({_id:req.params.id})
+            await PriceList.findByIdAndRemove(req.params.listId)
             console.log('Deleted Price List')
             res.redirect('/priceLists')
+        }catch(err){
+            console.log(err)
+        }
+    },
+    deletePriceListItem: async (req, res)=>{
+        try{
+            await PriceListItem.findByIdAndRemove(req.params.itemId)
+            console.log('Deleted Price List Item')
+            res.redirect(`/priceLists/${req.params.listId}`)
         }catch(err){
             console.log(err)
         }

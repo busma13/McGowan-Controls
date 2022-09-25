@@ -9,7 +9,33 @@
     </div>
     <div class="row mt-5">
         <!-- TODO: Create a table here - editable? -->
-
+        <!-- editable product table -->
+<div class="container full-width">
+    <div id="product-table-container">
+        <table class="editable">
+            <tbody id="product-table-body"> 
+                <tr>
+                    <th></th>
+                    <th>Item Name</th>
+                    <th>Price</th>
+                    <th>Note</th>
+                </tr>
+                    <% listItems.forEach( el => { %>
+                        <tr id="<%= el.id %>">
+                            <td>
+                                <form action="/priceLists/deletePriceListItem/<%= el.priceListId %>/<%= el.id %>?_method=DELETE" method="POST" class="col-3">
+                                    <button class="btn btn-primary fa fa-trash" type="submit"></button>
+                                </form>
+                            </td>
+                            <td class="itemName"><%= el.itemName %></td>
+                            <td class="price"><%= el.itemPrice %></td>
+                            <td class="note"><%= el.note %></td>
+                        </tr>
+                    <% }) %>    
+            </tbody>
+        </table>
+    </div>
+</div><!-- / editable product table -->
         <!-- <ul>
             <%# listItems.forEach( el => { %>
                     <li class='priceList' data-id='<%#= el._id %>'>
@@ -23,14 +49,14 @@
     </div>
     <div class="mt-5">
         <h2>Add item</h2>
-        <form action="/priceLists/createPriceList" method="POST">
+        <form action="/priceLists/createPriceListItem/<%= listId %>" method="POST">
           <div class="mb-3">
               <label for="itemName" class="form-label">Item Name</label>
               <input type="text" class="form-control" id="itemName" name="itemName">
           </div>
           <div class="mb-3">
             <label for="itemPrice" class="form-label">Price</label>
-            <input type="text" class="form-control" id="itemPrice" name="itemPrice">
+            <input type="number" min="0.01" step="0.01" max="30000" class="form-control" id="itemPrice" name="itemPrice"/>
         </div>
         <div class="mb-3">
             <label for="itemNote" class="form-label">Note</label>
