@@ -1,53 +1,40 @@
 <%- include('partials/header') -%>
-<div class="container">
-    <div class="row mt-5">
+<div class="container mx-auto">
+    <div class="flex justify-center lg:justify-end mt-5 mx-2">
         <div>
-            <p><strong>Employee</strong>: <%= user.userName %></p>
+            <p><strong>Employee Name</strong>: <%= user.userName %></p>
             <p><strong>Email</strong>: <%= user.email %></p>
-            <a href="/logout" class="col-3 btn btn-primary">Logout</a>
         </div>
     </div>
-    <div class="row mt-5">
-        <!-- TODO: Create a table here - editable? -->
+    <div class="mt-24 mx-5 lg:mx-24">
         <!-- editable product table -->
-<div class="container full-width">
-    <div id="product-table-container">
-        <table class="editable">
-            <tbody id="product-table-body"> 
-                <tr>
-                    <th></th>
-                    <th>Item Name</th>
-                    <th>Price</th>
-                    <th>Note</th>
-                </tr>
-                    <% listItems.forEach( el => { %>
-                        <tr id="<%= el.id %>">
-                            <td>
-                                <form action="/priceLists/deletePriceListItem/<%= el.priceListId %>/<%= el.id %>?_method=DELETE" method="POST" class="col-3">
-                                    <button class="btn btn-primary fa fa-trash" type="submit"></button>
-                                </form>
-                            </td>
-                            <td class="itemName"><%= el.itemName %></td>
-                            <td class="price"><%= el.itemPrice %></td>
-                            <td class="note"><%= el.note %></td>
+        <div class="container">
+            <div id="table-container">
+                <table class="editable">
+                    <tbody id="table-body" data-listid="<%= listId %>"> 
+                        <tr>
+                            <th></th>
+                            <th>Item Name</th>
+                            <th>Price</th>
+                            <th>Note</th>
                         </tr>
-                    <% }) %>    
-            </tbody>
-        </table>
+                            <% listItems.forEach( (el, i) => { %>
+                                <tr id="<%= el.id %>">
+                                    <td>
+                                        <label for="my-modal-6" class="btn modal-button fa fa-trash" data-index="<%= i %>"></label>
+                                    </td>
+                                    <td class="itemName"><%= el.itemName %></td>
+                                    <td class="itemPrice"><%= el.itemPrice %></td>
+                                    <td class="note"><%= el.note %></td>
+                                </tr>
+                            <% }) %>    
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- / editable product table -->
+        
     </div>
-</div><!-- / editable product table -->
-        <!-- <ul>
-            <%# listItems.forEach( el => { %>
-                    <li class='priceList' data-id='<%#= el._id %>'>
-                        <a href="/priceLists/<%#= el._id %>?listName=<%#= el.listName %>"><span class='priceListName'><%#= el.listName %></span></a>
-                        <form action="/priceLists/deletePriceList/<%#= el.id %>?_method=DELETE" method="POST" class="col-3">
-                        <button class="btn btn-primary fa fa-trash" type="submit"></button>
-                      </form>
-                    </li>
-            <%# }) %>    
-        </ul> -->
-    </div>
-    <div class="mt-5">
+    <div class="m-5">
         <h2>Add item</h2>
         <form action="/priceLists/createPriceListItem/<%= listId %>" method="POST">
           <div class="mb-3">
@@ -66,4 +53,37 @@
         </form>
       </div>
 </div>
+
+<!-- Modal for confirming an item delete -->
+<!-- <div id="deleteConfirmation" class="modal">
+    <span onclick="document.getElementById('deleteConfirmation').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <div class="modal-content">
+        <h1>Delete Item</h1>
+        <p>Are you sure you want to delete this item?</p>
+
+        <div class="flex-container modal-button-container">
+        <button type="button" class="btn btn-rounded btn-info btn-modal btn-cancel">Cancel</button>
+        <form action="/priceLists/deletePriceListItem/<%= listId %>/?_method=DELETE" method="POST" class="col-3">
+            <button type="button" class="btn btn-rounded btn-danger btn-modal" id="btn-delete-item" data-id="0">Delete</button>
+        </form>
+        </div>
+    </div>
+</div> -->
+
+<!-- Modal to confirm item deletion-->
+<input type="checkbox" id="my-modal-6" class="modal-toggle" />
+<div class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Delete Item</h3>
+    <p class="py-4">Are you sure you want to delete this item?</p>
+    <div class="modal-action">
+      <label for="my-modal-6" class="btn">Cancel</label>
+      <form action="/priceLists/deletePriceListItem/<%= listId %>/?_method=DELETE" method="POST" class="col-3">
+        <button type="submit" class="btn btn-rounded btn-danger btn-modal" id="btn-delete-item" data-id="0">Delete</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../js/editablePriceList.js"></script>
 <%- include('partials/footer') -%>

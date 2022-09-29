@@ -11,6 +11,8 @@ router.post('/createPriceList', ensureAuth, priceListsController.createPriceList
 
 router.post('/createPriceListItem/:listId', ensureAuth, priceListsController.createPriceListItem)
 
+router.put('/editPriceListItem/:listId/:itemId', ensureAuth, priceListsController.editPriceListItem)
+
 router.delete('/deletePriceList/:listId', ensureAuth, priceListsController.deletePriceList)
 
 router.delete('/deletePriceListItem/:listId/:itemId', ensureAuth, priceListsController.deletePriceListItem)

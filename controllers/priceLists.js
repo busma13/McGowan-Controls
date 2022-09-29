@@ -42,6 +42,17 @@ module.exports = {
             console.log(err)
         }
     },
+    editPriceListItem: async (req, res)=>{
+        try {
+            let key = req.body.column;
+            let obj = {[key]: req.body.cellContent}
+            await PriceListItem.findByIdAndUpdate(req.params.itemId, obj)   
+            console.log('Price List Item Updated')
+            res.json('Price list item updated')
+        } catch (err) {
+            console.log(err)
+        }
+    },
     deletePriceList: async (req, res)=>{
         try{
             await PriceList.findByIdAndRemove(req.params.listId)

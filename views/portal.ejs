@@ -1,59 +1,54 @@
 <%- include('partials/header') -%>
 <div class="container mx-auto">
-    <div class="row mt-5">
+    <div class="flex justify-center lg:justify-end mt-5 mx-2">
         <div>
-            <p><strong>Employee</strong>: <%= user.userName %></p>
+            <p><strong>Employee Name</strong>: <%= user.userName %></p>
             <p><strong>Email</strong>: <%= user.email %></p>
-            <a href="/logout" class="col-3 btn btn-primary">Logout</a>
         </div>
     </div>
-    <div class="row mt-5">
-        <div class="col-6">
-            <a href="/docs"> 
-                <div class="card mb-4" style="width: 18rem;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Documentation</h5>
-                    </div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-items-center mt-14 xl:max-w-7xl mx-auto">
+        <a href="/priceLists"> 
+            <div class="card mb-4 md:p-8 bg-secondary shadow-xl w-48 sm:w-64">
+                <div class="card-body text-center">
+                    <h5 class="card-title justify-center text-black">Price Lists</h5>
                 </div>
-            </a>
-            <a href="/priceLists"> 
-                <div class="card mb-4" style="width: 18rem;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Price Lists</h5>
-                    </div>
+            </div>
+        </a>
+        <a href="/docs"> 
+            <div class="card mb-4 md:p-8 bg-secondary shadow-xl w-48  sm:w-64">
+                <div class="card-body text-center">
+                    <h5 class="card-title justify-center text-black">Documentation</h5>
                 </div>
-            </a>
-            <a href="/clock"> 
-                <div class="card mb-4" style="width: 18rem;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Time Clock</h5>
-                    </div>
+            </div>
+        </a>
+        <a href="/jobs"> 
+            <div class="card mb-4 md:p-8 bg-secondary shadow-xl w-48 sm:w-64">
+                <div class="card-body text-center">
+                    <h5 class="card-title justify-center text-black">Jobs</h5>
                 </div>
-            </a>
-        </div>
-        <div class="col-6">
-            <a href="/jobs"> 
-                <div class="card mb-4" style="width: 18rem;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Jobs</h5>
-                    </div>
+            </div>
+        </a>
+        <a href="/valveId"> 
+            <div class="card mb-4 md:p-8 bg-secondary shadow-xl w-48 sm:w-64">
+                <div class="card-body text-center">
+                    <h5 class="card-title justify-center text-black">Valve ID</h5>
                 </div>
-            </a>
-            <a href="/valveId"> 
-                <div class="card mb-4" style="width: 18rem;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Valve Identifier</h5>
-                    </div>
+            </div>
+        </a>
+        <a href="/clock"> 
+            <div class="card mb-4 md:p-8 bg-secondary shadow-xl w-48 sm:w-64">
+                <div class="card-body text-center">
+                    <h5 class="card-title justify-center text-black">Time Clock</h5>
                 </div>
-            </a>
-            <a href="/sizer"> 
-                <div class="card mb-4" style="width: 18rem;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">O-Ring Sizer</h5>
-                    </div>
+            </div>
+        </a>
+        <a href="/sizer"> 
+            <div class="card mb-4 md:p-8 bg-secondary shadow-xl w-48 sm:w-64">
+                <div class="card-body text-center">
+                    <h5 class="card-title justify-center text-black">O-Ring Sizer</h5>
                 </div>
-            </a>
-        </div>  
+            </div>
+        </a>
     </div>
 </div>
 <%- include('partials/footer') -%>

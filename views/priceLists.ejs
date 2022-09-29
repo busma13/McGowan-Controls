@@ -1,33 +1,32 @@
 <%- include('partials/header') -%>
-<div class="container">
-    <div class="row mt-5">
+<div class="container mx-auto">
+    <div class="flex justify-center lg:justify-end mt-5 mx-2">
         <div>
-            <p><strong>Employee</strong>: <%= user.userName %></p>
+            <p><strong>Employee Name</strong>: <%= user.userName %></p>
             <p><strong>Email</strong>: <%= user.email %></p>
-            <a href="/logout" class="col-3 btn btn-primary">Logout</a>
         </div>
     </div>
-    <div class="row mt-5">
+    <div class="mt-24 mx-5 lg:mx-24">
         <ul>
             <% listItems.forEach( el => { %>
-                <li class='priceList' data-id='<%= el._id %>'>
-                    <a href="/priceLists/<%= el._id %>"><span class='priceListName'><%= el.listName %></span></a>
+                <li class='priceList flex items-center' data-id='<%= el._id %>'>
                     <form action="/priceLists/deletePriceList/<%= el.id %>?_method=DELETE" method="POST" class="col-3">
-                        <button class="btn btn-primary fa fa-trash" type="submit"></button>
+                        <button class="btn btn-primary my-2 mr-2 fa fa-trash" type="submit"></button>
                     </form>
+                    <a href="/priceLists/<%= el._id %>"><span class='priceListName text-2xl'><%= el.listName %></span></a>
                 </li>
             <% }) %>    
         </ul>
     </div>
-    <div class="mt-5">
-        <h2>Add a Price List</h2>
-        <form action="/priceLists/createPriceList" method="POST">
-          <div class="mb-3">
-              <label for="newListName" class="form-label">List Name</label>
-              <input type="text" class="form-control" id="newListName" name="newListName">
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="m-5">
+        <h2 class="text-2xl text-center mt-24">Add a Price List</h2>
+        <form action="/priceLists/createPriceList" method="POST" class="flex flex-col items-center">
+            <div class="my-3">
+                <label for="newListName" class="form-label">List Name:</label>
+                <input type="text" class="form-control text-black p-3" id="newListName" name="newListName" placeholder="Price List">
+                <button type="submit" class="btn btn-primary mt-3">Create List</button>
+            </div>
         </form>
-      </div>
+    </div>
 </div>
 <%- include('partials/footer') -%>
