@@ -7,6 +7,8 @@ const User = require('../models/User')
       return res.redirect('/portal')
     }
     res.render('login', {
+      pageName: 'Employee Login',
+      url: 'login',
       title: 'Login'
     })
   }
@@ -52,7 +54,8 @@ const User = require('../models/User')
       return res.redirect('/portal')
     }
     res.render('signup', {
-      title: 'Create Account'
+      pageName: 'Create Account',
+      url: 'login'
     })
   }
   
