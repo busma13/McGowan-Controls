@@ -8,7 +8,6 @@ const flash = require('express-flash')
 const logger = require('morgan')
 const methodOverride = require("method-override");
 const connectDB = require('./config/database')
-const daisyui = require('daisyui')
 const mainRoutes = require('./routes/main')
 const priceListsRoutes = require('./routes/priceLists')
 const portalRoutes = require('./routes/portal')
