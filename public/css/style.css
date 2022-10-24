@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+form .btn {
+    background-color: rgb(28, 79, 130);
+}

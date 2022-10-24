@@ -1,32 +1,61 @@
 <%- include('partials/header') -%>
 <div class="container mx-auto">
-    <div class="flex justify-center lg:justify-end mt-5 mx-2">
-        <div>
-            <p><strong>Employee Name</strong>: <%= user.userName %></p>
-            <p><strong>Email</strong>: <%= user.email %></p>
-        </div>
+  <div class="flex justify-center sm:justify-end mt-5 mx-2">
+    <div>
+      <p><strong>Employee Name</strong>: <%= user.userName %></p>
+      <p><strong>Email</strong>: <%= user.email %></p>
     </div>
-    <div class="mt-24 mx-5 lg:mx-24">
-        <ul>
-            <% listItems.forEach( el => { %>
-                <li class='priceList flex items-center' data-id='<%= el._id %>'>
-                    <form action="/priceLists/deletePriceList/<%= el.id %>?_method=DELETE" method="POST" class="col-3">
-                        <button class="btn btn-primary my-2 mr-2 fa fa-trash" type="submit"></button>
-                    </form>
-                    <a href="/priceLists/<%= el._id %>"><span class='priceListName text-2xl'><%= el.listName %></span></a>
-                </li>
-            <% }) %>    
-        </ul>
-    </div>
-    <div class="m-5">
-        <h2 class="text-2xl text-center mt-24">Add a Price List</h2>
-        <form action="/priceLists/createPriceList" method="POST" class="flex flex-col items-center">
-            <div class="my-3">
-                <label for="newListName" class="form-label">List Name:</label>
-                <input type="text" class="form-control text-black p-3" id="newListName" name="newListName" placeholder="Price List">
-                <button type="submit" class="btn btn-primary mt-3">Create List</button>
-            </div>
+  </div>
+  <div class="mt-12 mb-10 mx-5 lg:mx-24">
+    <ul>
+      <% listItems.forEach( (el, i) => { %>
+        <li class='priceList flex items-center' data-id='<%= el._id %>'>
+          <button class="btn modal-button list-modal-button fa fa-trash mr-2" data-id='<%= el._id %>'></button>
+          <a href="/priceLists/<%= el._id %>"><span class='priceListName text-2xl'><%= el.listName %></span></a>
+          <form action="/priceLists/favoritePriceList/<%= el._id %>?_method=PUT&favorited=<%= el.favorite %>" method="POST" class="col-3">
+            <% if (el.favorite) { %>
+              <button class="text-warning my-2 ml-2 fa fa-star" type="submit"></button>
+            <% } else { %>
+              <button class="my-2 ml-2 fa fa-star" type="submit"></button>
+            <% } %>
         </form>
+        </li>
+      <% }) %>    
+    </ul>
+  </div>
+  <hr class="mb-10">
+  <div class="flex flex-wrap items-center justify-center mb-10">
+    <div class="card card-bordered border-white w-96 glass">
+
+      <div class="card-body items-center">
+        <h2 class="card-title">Add a Price List</h2>
+        <div class="card-actions justify-end">
+          <form action="/priceLists/createPriceList" method="POST" class="flex flex-col items-center">
+            <label class="input-group input-group-vertical mb-2">
+              <span>List Name:</span>
+              <input type="text"  id="newListName" name="newListName" placeholder="Price List" class="input input-bordered">
+            </label>
+            <button type="submit" class="btn btn-primary mt-3">Create List</button>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
+
+<!-- Modal to confirm list deletion-->
+<input type="checkbox" id="delete-list-modal" class="modal-toggle" />
+<div class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Delete Item</h3>
+    <p class="py-4">Are you sure you want to delete this list?</p>
+    <div class="modal-action">
+      <button class="btn cancel-delete-list">Cancel</button>
+      <form action="/priceLists/deletePriceList/" method="POST" class="col-3">
+        <button type="submit" class="btn btn-rounded btn-danger btn-modal" id="btn-delete-item" data-id="0">Delete</button>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="../js/deleteListModal.js"></script>
 <%- include('partials/footer') -%>

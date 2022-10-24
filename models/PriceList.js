@@ -4,6 +4,11 @@ const PriceListSchema = new mongoose.Schema({
   listName: {
     type: String,
     required: true,
+  },
+  favorite: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 })
 

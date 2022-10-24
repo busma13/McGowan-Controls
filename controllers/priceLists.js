@@ -5,7 +5,7 @@ module.exports = {
     getPriceLists: async (req,res)=>{
         console.log(req.user)
         try{
-            const listItems = await PriceList.find()
+            const listItems = await PriceList.find().sort({favorite: "desc"}).collation({locale:'en',strength: 2}).sort({listName: 1})
             res.render('priceLists.ejs',  { user: req.user, pageName: 'Price Lists', url: 'priceLists', listItems: listItems})
         }catch(err){
             console.log(err)
@@ -39,6 +39,25 @@ module.exports = {
             console.log('Price list item has been added!')
             res.redirect(`/priceLists/${req.params.listId}`)
         }catch(err){
+            console.log(err)
+        }
+    },
+    favoritePriceList: async (req, res)=>{
+        try {
+            if (req.query.favorited === 'true') {
+                await PriceList.findByIdAndUpdate(req.params.listId, {'favorite' : false})   
+                console.log('List removed from favorites')
+                // res.json('List removed from favorites')
+                res.redirect('/priceLists')
+
+            } else {
+                await PriceList.findByIdAndUpdate(req.params.listId, {'favorite' : true})   
+                console.log('List added to favorites')
+                // res.json('List added to favorites')
+                res.redirect('/priceLists')
+            }
+            
+        } catch (err) {
             console.log(err)
         }
     },
