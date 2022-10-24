@@ -2,7 +2,7 @@ const itemDeleteButtons = document.querySelectorAll('.item-modal-button')
 itemDeleteButtons.forEach(modl => modl.addEventListener('click', passIdToItemModal))
 const modal = document.querySelector('.modal')
 console.log(document.querySelector('#table-body'))
-const listId = document.querySelector('#table-body').dataset.listid
+// const listId = document.querySelector('#table-body').dataset.listid
 console.log(listId)
 
 function passIdToItemModal(event) {

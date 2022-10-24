@@ -5,7 +5,7 @@ const listId = document.querySelector('#table-body').dataset.listid;
 // Start Edit Item Table 
 // (A) INITIALIZE - DOUBLE CLICK TO EDIT CELL
 window.addEventListener("DOMContentLoaded", () => {
-    for (let cell of document.querySelectorAll(".editable td")) {
+    for (let cell of document.querySelectorAll(".editable td.can-edit")) {
       cell.ondblclick = () => { editable.edit(cell); };
     }
 });
