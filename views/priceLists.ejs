@@ -9,16 +9,19 @@
   <div class="mt-12 mb-10 mx-5 lg:mx-24">
     <ul>
       <% listItems.forEach( (el, i) => { %>
-        <li class='priceList flex items-center' data-id='<%= el._id %>'>
-          <button class="btn modal-button list-modal-button fa fa-trash mr-2" data-id='<%= el._id %>'></button>
-          <a href="/priceLists/<%= el._id %>"><span class='priceListName text-2xl'><%= el.listName %></span></a>
-          <form action="/priceLists/favoritePriceList/<%= el._id %>?_method=PUT&favorited=<%= el.favorite %>" method="POST" class="col-3">
-            <% if (el.favorite) { %>
-              <button class="text-warning my-2 ml-2 fa fa-star" type="submit"></button>
-            <% } else { %>
-              <button class="my-2 ml-2 fa fa-star" type="submit"></button>
-            <% } %>
-        </form>
+        <li class='priceList flex justify-between items-center border-2 border-secondary mb-4 py-2  ' data-id='<%= el._id %>'>
+          <div class="flex items-center">
+            <form action="/priceLists/favoritePriceList/<%= el._id %>?_method=PUT&favorited=<%= el.favorite %>" method="POST" class="col-3">
+              <% if (el.favorite) { %>
+                <button class="text-warning my-2 mx-2 fa fa-star" type="submit"></button>
+              <% } else { %>
+                <button class="my-2 mx-2 fa fa-star" type="submit"></button>
+              <% } %>
+            </form>
+            <a href="/priceLists/<%= el._id %>"><span class='priceListName text-2xl break-all'><%= el.listName %></span></a>
+          </div>
+          
+          <button class="btn modal-button list-modal-button fa fa-trash mx-2" data-id='<%= el._id %>'></button>
         </li>
       <% }) %>    
     </ul>
