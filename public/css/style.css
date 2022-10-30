@@ -5,3 +5,7 @@
 form .btn {
     background-color: rgb(28, 79, 130);
 }
+
+td > div {
+    overflow-wrap: break-word;
+}
