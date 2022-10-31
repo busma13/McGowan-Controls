@@ -11,6 +11,7 @@ const connectDB = require('./config/database')
 const mainRoutes = require('./routes/main')
 const priceListsRoutes = require('./routes/priceLists')
 const portalRoutes = require('./routes/portal')
+const productIDRoutes = require('./routes/productID')
 
 require('dotenv').config({path: './config/.env'})
 
@@ -47,6 +48,7 @@ app.use(flash())
 app.use('/', mainRoutes)
 app.use('/priceLists', priceListsRoutes)
 app.use('/portal', portalRoutes)
+app.use('/productID', productIDRoutes)
  
 app.listen(process.env.PORT, ()=>{
     console.log(`Server is running on port ${process.env.PORT}.`)

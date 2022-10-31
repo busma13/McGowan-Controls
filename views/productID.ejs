@@ -1,0 +1,149 @@
+<%- include('partials/header') -%>
+<div class="container mx-auto">
+  <div class="flex justify-center sm:justify-end mt-5 mx-2">
+    <div>
+      <p><strong>Employee Name</strong>: <%= user.userName %></p>
+      <p><strong>Email</strong>: <%= user.email %></p>
+    </div>
+  </div>
+  <div class="mt-12 mb-10 mx-5 lg:mx-24">
+    <input type="radio" name="manufacturer" value="Danfoss"/> Danfoss
+    <!-- <input type="radio" name="manufacturer" value="McGowan"/> McGowan Controls -->
+    <input type="radio" name="manufacturer" value="Moog"/> Moog
+    <div id="containerDanfoss" class="formDiv" hidden>
+      <form id="formDanfoss" action="" method="post">
+        <label>
+          <span>Product Type:</span>
+          <select name="danfossProductType" id="danfossProductType">
+            <option value="PCP">Pressure Control Pilot</option>
+            <option value="EDC">Electrical Displacement Control</option>
+            <option value="Servo">Flow Control Servo (KVF)</option>
+            <option value="MCH">Control Handle (MCH)</option>
+          </select>
+        </label>
+        <div id="containerPCP" class="productTypeDiv" hidden>
+          <label>
+            <span>Model:</span>
+            <select name="modelType" id="modelType">
+              <option value="110">MCV110</option>
+              <option value="116">MCV116</option>
+            </select>
+          </label>
+          <div id="container116" class="pilotDiv" hidden>
+            <label>
+              <span>Revision:</span>
+              <select name="revType" id="revType">
+                <option value="A">A</option>
+                <option value="C">C</option>
+                <option value="F">F</option>
+                <option value="G">G</option>
+                <option value="H">H</option>
+                <option value="M">M</option>
+              </select>
+            </label>
+            <label>
+              <span>Type:</span>
+              <select name="typeNumber" id="typeNumber">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </label>
+            <label>
+              <span>Coil:</span>
+              <select name="coilType" id="coilType">
+                <option value="1">23 ohm</option>
+                <option value="2">19/15.5 ohm dual coil</option>
+                <option value="3">69 ohm</option>
+                <option value="4">106 ohm</option>
+                <option value="5">643 ohm</option>
+                <option value="6">34.5 ohm</option>
+              </select>
+            </label>
+            <label>
+              <span>Connector:</span>
+              <select name="connectorType" id="connectorType">
+                <option value="00">None</option>
+                <option value="00">Lead wires only, 4 inch</option>
+                <option value="01">MS</option>
+                <option value="02">Packard Weather-pack 2-pin shroud</option>
+                <option value="03">Twin Packard Weather-pack 2-pin shroud</option>
+                <option value="04">Packard Weather-pack 4-pin shroud</option>
+                <option value="05">Packard Metri-pack 2-pin 280 series male</option>
+                <option value="06">Packard Metri-pack 4-pin (5 cavity) 280 series male</option>
+                <option value="07">MS with jumper from B to D pins</option>
+                <option value="11">Packard Metri-pack 4-pin 150 series female</option>
+                <option value="12">Packard Metri-pack 2-pin 150 series male</option>
+                <option value="13">Packard Metri-pack 4-pin 150 series male</option>
+                <option value="14">Deutsch 4-pin plug DT series</option>
+                <option value="18">Deutsch 2-pin plug DT series</option>
+              </select>
+            </label>
+            <label>
+              <span>Where Used:</span>
+              <select name="modelType" id="modelType">
+                <option value="IS">Intrinsically Safe</option>
+                <option value="KVF">KVF Servo</option>
+                <option value="4-20">EDC all 4-20 mA</option>
+                <option value="S-20,M-46">EDC S-20,M-46</option>
+                <option value="S-90">EDC S-90</option>
+                <option value="114">EDC S-90 MCV114</option>
+                <option value="KVEA">EDC S-90 KVEA</option>
+                <option value="KVEB">EDC S-90 KVEB</option>
+              </select>
+            </label>
+          </div>
+          <div id="container110" class="pilotDiv" hidden>
+            <label>
+              <span>Connector:</span>
+              <select name="connectorType" id="connectorType">
+                <option value="00">None</option>
+                <!-- <option value="09">MS</option> -->
+                <option value="14">Deutsch 4-pin plug DT series</option>
+                <option value="17">MS</option>
+                <!-- <option value="41">Packard Weather-pack 4-pin shroud</option> -->
+                <option value="58">Packard Weather-pack 4-pin shroud</option>
+                <option value="59">Packard Weather-pack 4-pin shroud 15 inch lead</option>
+                <option value="90">Packard Metri-pack 4-pin 150 series male</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div id="containerEDC" class="productTypeDiv" hidden>
+          <label>
+            <span>Pump Series:</span>
+            <select name="modelType" id="modelType">
+              <option value="20">Series 20</option>
+              <option value="42">Series 42</option>
+              <option value="46">Series M-46</option>
+              <option value="90">Series 90</option>
+            </select>
+          </label>
+        </div>
+        <div id="containerServo" class="productTypeDiv" hidden>
+
+        </div>
+        <div id="containerMCH" class="productTypeDiv" hidden>
+
+        </div>
+        
+      </form>
+    </div>
+    <div id="containerMoog" class="formDiv" hidden>
+      <form id="formMoog" action="" method="post">
+        <label>
+          <span>Product Type:</span>
+          <select name="moogProductType" id="moogProductType">
+            <option value="pumpControl">Pump Control</option>
+            <option value="servo">Servo</option>
+          </select>
+        </label>
+      </form>
+    </div>
+  </div>
+  <hr class="mb-10">
+  
+</div>
+<script src="../js/productID.js"></script>
+<%- include('partials/footer') -%>
