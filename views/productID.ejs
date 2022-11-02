@@ -14,7 +14,8 @@
       <form id="formDanfoss" action="" method="post">
         <label>
           <span>Product Type:</span>
-          <select name="danfossProductType" id="danfossProductType">
+          <select name="danfossProductType" id="danfossProductType" class="productTypeSelect input input-bordered">
+            <option value="none" selected disabled>Choose A Product Type</option>
             <option value="PCP">Pressure Control Pilot</option>
             <option value="EDC">Electrical Displacement Control</option>
             <option value="Servo">Flow Control Servo (KVF)</option>
@@ -24,7 +25,7 @@
         <div id="containerPCP" class="productTypeDiv" hidden>
           <label>
             <span>Model:</span>
-            <select name="modelType" id="modelType">
+            <select name="modelType" id="modelType" class="input input-bordered">
               <option value="110">MCV110</option>
               <option value="116">MCV116</option>
             </select>
@@ -32,7 +33,7 @@
           <div id="container116" class="pilotDiv" hidden>
             <label>
               <span>Revision:</span>
-              <select name="revType" id="revType">
+              <select name="revType" id="revType" class="input input-bordered">
                 <option value="A">A</option>
                 <option value="C">C</option>
                 <option value="F">F</option>
@@ -43,7 +44,7 @@
             </label>
             <label>
               <span>Type:</span>
-              <select name="typeNumber" id="typeNumber">
+              <select name="typeNumber" id="typeNumber" class="input input-bordered">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -52,7 +53,7 @@
             </label>
             <label>
               <span>Coil:</span>
-              <select name="coilType" id="coilType">
+              <select name="coilType" id="coilType" class="input input-bordered">
                 <option value="1">23 ohm</option>
                 <option value="2">19/15.5 ohm dual coil</option>
                 <option value="3">69 ohm</option>
@@ -63,7 +64,7 @@
             </label>
             <label>
               <span>Connector:</span>
-              <select name="connectorType" id="connectorType">
+              <select name="connectorType" id="connectorType" class="input input-bordered">
                 <option value="00">None</option>
                 <option value="00">Lead wires only, 4 inch</option>
                 <option value="01">MS</option>
@@ -82,7 +83,7 @@
             </label>
             <label>
               <span>Where Used:</span>
-              <select name="modelType" id="modelType">
+              <select name="modelType" id="modelType" class="input input-bordered">
                 <option value="IS">Intrinsically Safe</option>
                 <option value="KVF">KVF Servo</option>
                 <option value="4-20">EDC all 4-20 mA</option>
@@ -113,7 +114,7 @@
         <div id="containerEDC" class="productTypeDiv" hidden>
           <label>
             <span>Pump Series:</span>
-            <select name="modelType" id="modelType">
+            <select name="modelType" id="modelType" class="input input-bordered">
               <option value="20">Series 20</option>
               <option value="42">Series 42</option>
               <option value="46">Series M-46</option>
@@ -122,10 +123,30 @@
           </label>
         </div>
         <div id="containerServo" class="productTypeDiv" hidden>
-
+          <label>
+            <span>Supply Pressure:</span>
+            <select name="servoSupply" id="servoSupply" class="input input-bordered">
+              <option value="A">500 to 3000 psi</option>
+              <option value="C">200 to 1000 psi</option>
+              <option value="D">500 to 3000 psi with separate pilot drain</option>
+              <option value="E">2500 to 3000 psi</option>
+              <option value="F">500 to 3000 psi w/o cylinder port orifices</option>
+              <option value="G">500 to 3000 psi w/o cylinder port orifices
+and with pilot drain</option>
+            </select>
+          </label>
         </div>
         <div id="containerMCH" class="productTypeDiv" hidden>
-
+          <label>
+            <span>Mounting:</span>
+            <select name="modelType" id="modelType" class="input input-bordered">
+              <option value="1">Base (surface) mount aluminum case</option>
+              <option value="2">Top mount (drop-in) with plastic case</option>
+              <option value="3">Top mount (drop-in) without plastic case</option>
+              <option value="4">Panel mount with plastic case</option>
+              <option value="5">Panel mount without plastic case</option>
+            </select>
+          </label>
         </div>
         
       </form>
@@ -134,7 +155,7 @@
       <form id="formMoog" action="" method="post">
         <label>
           <span>Product Type:</span>
-          <select name="moogProductType" id="moogProductType">
+          <select name="moogProductType" id="moogProductType" class="productTypeSelect input input-bordered">
             <option value="pumpControl">Pump Control</option>
             <option value="servo">Servo</option>
           </select>
