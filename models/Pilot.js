@@ -1,11 +1,15 @@
 const mongoose = require('mongoose')
 
 const PilotSchema = new mongoose.Schema({
+  modelNumber: {
+    type: String,
+    required: true,
+  },
   manufacturer: {
     type: String,
     required: true,
   },
-  modelNumber: {
+  prefix: {
     type: String,
     required: true,
   },
@@ -14,17 +18,21 @@ const PilotSchema = new mongoose.Schema({
     required: true,
   },
   typeNumber: {
-    type: Number,
-    required: true,
+    type: String,
+    required: false,
   },
   coilNumber: {
-    type: Number,
-    required: true,
+    type: String,
+    required: false,
   },
   connectorNumber: {
-    type: Number,
+    type: String,
     required: true,
   },
+  whereUsed: {
+    type: String,
+    required: false,
+  }
 })
 
 module.exports = mongoose.model('Pilot', PilotSchema)

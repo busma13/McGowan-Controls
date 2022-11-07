@@ -3,8 +3,8 @@ const router = express.Router()
 const productIDController = require('../controllers/productID') 
 const { ensureAuth } = require('../middleware/auth')
 
-router.get('/', ensureAuth, productIDController.getProductID)
+router.get('/', ensureAuth, productIDController.getProductIDPage)
 
-// router.get('/:listId', ensureAuth, priceListsController.getSinglePriceList)
+router.get('/pilot', ensureAuth, productIDController.getProductIDPilot)
 
 module.exports = router
