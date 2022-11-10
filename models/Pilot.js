@@ -5,12 +5,8 @@ const PilotSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  manufacturer: {
-    type: String,
-    required: true,
-  },
   prefix: {
-    type: String,
+    type: Number,
     required: true,
   },
   revisionLetter: {
@@ -18,15 +14,15 @@ const PilotSchema = new mongoose.Schema({
     required: true,
   },
   typeNumber: {
-    type: String,
+    type: Number,
     required: false,
   },
   coilNumber: {
-    type: String,
+    type: Number,
     required: false,
   },
   connectorNumber: {
-    type: String,
+    type: Number,
     required: true,
   },
   whereUsed: {

@@ -41,6 +41,7 @@
               <option value="F">F</option>
               <option value="G">G</option>
               <option value="H">H</option>
+              <option value="J">J</option>
               <option value="M">M</option>
             </select>
           </label>
@@ -70,15 +71,15 @@
             <span>Connector:</span>
             <select name="connectorType" id="connectorType" class="input input-bordered">
               <option value="all" selected>All</option>
-              <option value="00">None</option>
-              <option value="00">Lead wires only, 4 inch</option>
-              <option value="01">MS</option>
-              <option value="02">Packard Weather-pack 2-pin shroud</option>
-              <option value="03">Twin Packard Weather-pack 2-pin shroud</option>
-              <option value="04">Packard Weather-pack 4-pin shroud</option>
-              <option value="05">Packard Metri-pack 2-pin 280 series male</option>
-              <option value="06">Packard Metri-pack 4-pin (5 cavity) 280 series male</option>
-              <option value="07">MS with jumper from B to D pins</option>
+              <option value="0">None</option>
+              <option value="0">Lead wires only, 4 inch</option>
+              <option value="1">MS</option>
+              <option value="2">Packard Weather-pack 2-pin shroud</option>
+              <option value="3">Twin Packard Weather-pack 2-pin shroud</option>
+              <option value="4">Packard Weather-pack 4-pin shroud</option>
+              <option value="5">Packard Metri-pack 2-pin 280 series male</option>
+              <option value="6">Packard Metri-pack 4-pin (5 cavity) 280 series male</option>
+              <option value="7">MS with jumper from B to D pins</option>
               <option value="11">Packard Metri-pack 4-pin 150 series female</option>
               <option value="12">Packard Metri-pack 2-pin 150 series male</option>
               <option value="13">Packard Metri-pack 4-pin 150 series male</option>
@@ -91,9 +92,11 @@
             <select name="modelType" id="modelType" class="input input-bordered">
               <option value="all" selected>All</option>
               <option value="IS">Intrinsically Safe</option>
-              <option value="KVF">KVF Servo</option>
+              <option value="KVF">Servo - KVF</option>
+              <option value="102">Servo - MCV102</option>
               <option value="4-20">EDC all 4-20 mA</option>
-              <option value="S-20,M-46">EDC Series-20,M-46</option>
+              <option value="S-20|M-46">EDC Series-20</option>
+              <option value="S-20|M-46">EDC M-46</option>
               <option value="S-90">EDC Series-90</option>
               <option value="114">EDC Series-90 MCV114</option>
               <option value="KVEA">EDC Series-90 KVEA</option>
@@ -107,7 +110,7 @@
             <span>Connector:</span>
             <select name="connectorType" id="connectorType" class="input input-bordered">
               <option value="all" selected>All</option>
-              <option value="00">None</option>
+              <option value="0">None</option>
               <!-- <option value="09">MS</option> -->
               <option value="14">Deutsch 4-pin plug DT series</option>
               <option value="17">MS</option>

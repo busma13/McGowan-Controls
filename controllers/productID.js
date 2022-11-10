@@ -23,25 +23,26 @@ module.exports = {
                 if (selectValues.includes('all')) {
                     query = {prefix: '110'}
                 } else {
-                    query = {prefix: '110', connectorNumber: selectValues[0]}
+                    query = {prefix: 110, connectorNumber: Number(selectValues[0])}
                 }
-                pilotsList = await Pilot.find(query, 'modelNumber').sort('modelNumber')
             } else { // 116 pilot
-                query = {prefix: '116', revisionLetter: selectValues[0], typeNumber: selectValues[1],coilNumber: selectValues[2], connectorNumber: selectValues[3], whereUsed: selectValues[4]}
+                query = {prefix: 116, revisionLetter: selectValues[0], typeNumber: Number(selectValues[1]),coilNumber: Number(selectValues[2]), connectorNumber: Number(selectValues[3]), whereUsed: selectValues[4]}
 
                 if (selectValues.includes('all')) {
                     selectValues.forEach((value, idx) => {
-                        console.log('value: ', value, ' idx: ', idx)
+                        // console.log('value: ', value, ' idx: ', idx)
                         if (value === 'all') {
                             removeUnusedQuerySelector(query, idx)
                         }
-                        console.log('query: ', query)
                     })
                     
                 }
-                pilotsList = await Pilot.find(query, 'modelNumber').sort('modelNumber')
-
+                // pilotsList = await Pilot.find({query})//.sort('modelNumber') //, 'modelNumber'
+                
             } 
+            console.log('query: ', query)
+            pilotsList = await Pilot.find(query, 'modelNumber').sort('modelNumber')
+
             console.log('pilotsList:', pilotsList)
             res.json(pilotsList)
         }catch(err){
@@ -51,7 +52,6 @@ module.exports = {
 }    
 
 function removeUnusedQuerySelector(query, index) {
-    console.log(query, index)
     switch (index) {
         case 0:
             delete query['revisionLetter']
@@ -69,5 +69,4 @@ function removeUnusedQuerySelector(query, index) {
             delete query['whereUsed']
             break
     }
-    console.log('remove final query: ', query)
 }

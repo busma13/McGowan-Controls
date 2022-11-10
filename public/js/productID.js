@@ -76,7 +76,6 @@ async function searchForProducts(e) {
         resultProductsList.removeChild(resultProductsList.firstChild)
     }
     if (searchResults.length === 0) {
-        console.log('test')
         const li = document.createElement('li')
         li.textContent = 'No products match those criteria.'
         resultProductsList.appendChild(li)
