@@ -26,7 +26,7 @@ module.exports = {
                     query = {prefix: 110, connectorNumber: Number(selectValues[0])}
                 }
             } else { // 116 pilot
-                query = {prefix: 116, revisionLetter: selectValues[0], typeNumber: Number(selectValues[1]),coilNumber: Number(selectValues[2]), connectorNumber: Number(selectValues[3]), whereUsed: selectValues[4]}
+                query = {prefix: 116, configurationLetter: selectValues[0], typeNumber: Number(selectValues[1]),coilNumber: Number(selectValues[2]), connectorNumber: Number(selectValues[3]), whereUsed: selectValues[4]}
 
                 if (selectValues.includes('all')) {
                     selectValues.forEach((value, idx) => {
@@ -35,11 +35,9 @@ module.exports = {
                             removeUnusedQuerySelector(query, idx)
                         }
                     })
-                    
                 }
-                // pilotsList = await Pilot.find({query})//.sort('modelNumber') //, 'modelNumber'
-                
             } 
+            
             console.log('query: ', query)
             pilotsList = await Pilot.find(query, 'modelNumber').sort('modelNumber')
 
@@ -54,7 +52,7 @@ module.exports = {
 function removeUnusedQuerySelector(query, index) {
     switch (index) {
         case 0:
-            delete query['revisionLetter']
+            delete query['configurationLetter']
             break
         case 1:
             delete query['typeNumber']
@@ -70,3 +68,9 @@ function removeUnusedQuerySelector(query, index) {
             break
     }
 }
+
+// Use as a template to update filed names in a collection
+// Pilot.updateMany({ prefix: 116}, {$rename:{revisionLetter:"configurationLetter"}}, { multi: true }, function(err, blocks) {
+//     if(err) { throw err; }
+//     console.log('done!');
+// });

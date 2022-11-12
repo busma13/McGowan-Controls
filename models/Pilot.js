@@ -9,7 +9,7 @@ const PilotSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  revisionLetter: {
+  configurationLetter: {
     type: String,
     required: true,
   },

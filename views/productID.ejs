@@ -6,13 +6,18 @@
       <p><strong>Email</strong>: <%= user.email %></p>
     </div>
   </div>
-  <div class="mt-12 mb-10 mx-5 lg:mx-24">
-    <input type="radio" name="manufacturer" value="Danfoss"/> Danfoss
-    <!-- <input type="radio" name="manufacturer" value="McGowan"/> McGowan Controls -->
-    <input type="radio" name="manufacturer" value="Moog"/> Moog
-    <div id="containerDanfoss" class="manufacturerDiv" hidden>
-      <label>
-        <span>Product Type:</span>
+  <div class="mt-12 mb-10 mx-5 lg:mx-24 menu">
+    <div class="mb-4">
+      <span>Manufacturer: </span>
+      <input type="radio" name="manufacturer" value="Danfoss" id="danfoss"/> 
+      <label for="danfoss" class="mr-2">Danfoss</label> 
+      <input type="radio" name="manufacturer" value="Moog" id="moog"/>
+      <label for="moog" class="mr-2">Moog</label> 
+    </div>
+
+    <div id="containerDanfoss" class="manufacturerDiv mb-4" hidden>
+      <div class="mb-4">
+        <span>Product:</span>
         <select name="danfossProductType" id="danfossProductType" class="productTypeSelect input input-bordered">
           <option value="" selected disabled>Choose A Product Type</option>
           <option value="PCP">Pressure Control Pilot</option>
@@ -20,93 +25,18 @@
           <option value="Servo">Flow Control Servo (KVF)</option>
           <option value="MCH">Control Handle (MCH)</option>
         </select>
-      </label>
-      <div id="containerPCP" class="productTypeDiv" hidden>
-        <label>
+      </div>
+      <div id="containerPCP" class="productTypeDiv mb-4" hidden>
+        <div class="mb-4">
           <span>Model:</span>
           <select name="modelPrefixPCP" id="modelTypePCP" class="input input-bordered">
             <option value="" selected disabled>Choose a model</option>
             <option value="110">MCV110</option>
             <option value="116">MCV116</option>
           </select>
-        </label>
-        <div id="container116" class="pilotDiv" hidden>
-          <p>Enter all fields that you have data for:</p>
-          <label>
-            <span>Revision:</span>
-            <select name="revType" id="revType" class="input input-bordered">
-              <option value="all" selected>All</option>
-              <option value="A">A</option>
-              <option value="C">C</option>
-              <option value="F">F</option>
-              <option value="G">G</option>
-              <option value="H">H</option>
-              <option value="J">J</option>
-              <option value="M">M</option>
-            </select>
-          </label>
-          <label>
-            <span>Type:</span>
-            <select name="typeNumber" id="typeNumber" class="input input-bordered">
-              <option value="all" selected>All</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
-          </label>
-          <label>
-            <span>Coil:</span>
-            <select name="coilType" id="coilType" class="input input-bordered">
-              <option value="all" selected>All</option>
-              <option value="1">23 ohm</option>
-              <option value="2">19/15.5 ohm dual coil</option>
-              <option value="3">69 ohm</option>
-              <option value="4">106 ohm</option>
-              <option value="5">643 ohm</option>
-              <option value="6">34.5 ohm</option>
-            </select>
-          </label>
-          <label>
-            <span>Connector:</span>
-            <select name="connectorType" id="connectorType" class="input input-bordered">
-              <option value="all" selected>All</option>
-              <option value="0">None</option>
-              <option value="0">Lead wires only, 4 inch</option>
-              <option value="1">MS</option>
-              <option value="2">Packard Weather-pack 2-pin shroud</option>
-              <option value="3">Twin Packard Weather-pack 2-pin shroud</option>
-              <option value="4">Packard Weather-pack 4-pin shroud</option>
-              <option value="5">Packard Metri-pack 2-pin 280 series male</option>
-              <option value="6">Packard Metri-pack 4-pin (5 cavity) 280 series male</option>
-              <option value="7">MS with jumper from B to D pins</option>
-              <option value="11">Packard Metri-pack 4-pin 150 series female</option>
-              <option value="12">Packard Metri-pack 2-pin 150 series male</option>
-              <option value="13">Packard Metri-pack 4-pin 150 series male</option>
-              <option value="14">Deutsch 4-pin plug DT series</option>
-              <option value="18">Deutsch 2-pin plug DT series</option>
-            </select>
-          </label>
-          <label>
-            <span>Where Used:</span>
-            <select name="modelType" id="modelType" class="input input-bordered">
-              <option value="all" selected>All</option>
-              <option value="IS">Intrinsically Safe</option>
-              <option value="KVF">Servo - KVF</option>
-              <option value="102">Servo - MCV102</option>
-              <option value="4-20">EDC all 4-20 mA</option>
-              <option value="S-20|M-46">EDC Series-20</option>
-              <option value="S-20|M-46">EDC M-46</option>
-              <option value="S-90">EDC Series-90</option>
-              <option value="114">EDC Series-90 MCV114</option>
-              <option value="KVEA">EDC Series-90 KVEA</option>
-              <option value="KVEB">EDC Series-90 KVEB</option>
-            </select>
-          </label>
-          <button class="btn btn-primary mt-3" id="button116">Search</button>
         </div>
         <div id="container110" class="pilotDiv" hidden>
-          <label>
+          <div class="mb-4">
             <span>Connector:</span>
             <select name="connectorType" id="connectorType" class="input input-bordered">
               <option value="all" selected>All</option>
@@ -118,12 +48,95 @@
               <option value="59">Packard Weather-pack 4-pin shroud 15 inch lead</option>
               <option value="90">Packard Metri-pack 4-pin 150 series male</option>
             </select>
-          </label>
-          <button class="btn btn-primary mt-3" id="button110">Search</button>
+          </div>
+          <button class="btn btn-primary" id="button110">Search</button>
+        </div>
+        <div id="container116" class="pilotDiv mb-4" hidden>
+          <div class="flex justify-evenly">
+            <div>
+              <img src="/images/MCV116_Config.png" alt="MCV116 Configuration Chart" class="mb-4">
+              <p class="mb-4">Enter all fields that you have data for:</p>
+              <div class="mb-4">
+                <span>Configuration:</span>
+                <select name="revType" id="revType" class="input input-bordered">
+                  <option value="all" selected>All</option>
+                  <option value="A">A</option>
+                  <option value="C">C</option>
+                  <option value="F">F</option>
+                  <option value="G">G</option>
+                  <option value="H">H</option>
+                  <option value="J">J</option>
+                  <option value="M">M</option>
+                </select>
+              </div>
+              <div class="mb-4">
+                <span>Type:</span>
+                <select name="typeNumber" id="typeNumber" class="input input-bordered">
+                  <option value="all" selected>All</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+              <div class="mb-4">
+                <span>Coil:</span>
+                <select name="coilType" id="coilType" class="input input-bordered">
+                  <option value="all" selected>All</option>
+                  <option value="1">23 ohm</option>
+                  <option value="2">19/15.5 ohm dual coil</option>
+                  <option value="3">69 ohm</option>
+                  <option value="4">106 ohm</option>
+                  <option value="5">643 ohm</option>
+                  <option value="6">34.5 ohm</option>
+                </select>
+              </div>
+              <div class="mb-4">
+                <span>Connector:</span>
+                <select name="connectorType" id="connectorType" class="input input-bordered">
+                  <option value="all" selected>All</option>
+                  <option value="0">None</option>
+                  <option value="0">Lead wires only, 4 inch</option>
+                  <option value="1">MS</option>
+                  <option value="2">Packard Weather-pack 2-pin shroud</option>
+                  <option value="3">Twin Packard Weather-pack 2-pin shroud</option>
+                  <option value="4">Packard Weather-pack 4-pin shroud</option>
+                  <option value="5">Packard Metri-pack 2-pin 280 series male</option>
+                  <option value="6">Packard Metri-pack 4-pin (5 cavity) 280 series male</option>
+                  <option value="7">MS with jumper from B to D pins</option>
+                  <option value="11">Packard Metri-pack 4-pin 150 series female</option>
+                  <option value="12">Packard Metri-pack 2-pin 150 series male</option>
+                  <option value="13">Packard Metri-pack 4-pin 150 series male</option>
+                  <option value="14">Deutsch 4-pin plug DT series</option>
+                  <option value="18">Deutsch 2-pin plug DT series</option>
+                </select>
+              </div>
+              <div class="mb-4">
+                <span>Where Used:</span>
+                <select name="modelType" id="modelType" class="input input-bordered">
+                  <option value="all" selected>All</option>
+                  <option value="IS">Intrinsically Safe</option>
+                  <option value="KVF">Servo - KVF</option>
+                  <option value="102">Servo - MCV102</option>
+                  <option value="4-20">EDC all 4-20 mA</option>
+                  <option value="S-20|M-46">EDC Series-20</option>
+                  <option value="S-20|M-46">EDC M-46</option>
+                  <option value="S-90">EDC Series-90</option>
+                  <option value="114">EDC Series-90 MCV114</option>
+                  <option value="KVEA">EDC Series-90 KVEA</option>
+                  <option value="KVEB">EDC Series-90 KVEB</option>
+                </select>
+              </div>
+              <button class="btn btn-primary" id="button116">Search</button>
+            </div>
+            <figure class="mx-4 mb-4">
+              <img src="/images/MCV116.png" alt="MCV116 Pilot Valve" class="mb-4">
+            </figure>
+          </div>
         </div>
       </div>
-      <div id="containerEDC" class="productTypeDiv" hidden>
-        <label>
+      <div id="containerEDC" class="productTypeDiv mb-4" hidden>
+        <div class="mb-4">
           <span>Pump Series:</span>
           <select name="modelType" id="modelType" class="input input-bordered">
             <option value="20">Series 20</option>
@@ -131,11 +144,11 @@
             <option value="46">Series M-46</option>
             <option value="90">Series 90</option>
           </select>
-        </label>
+        </div>
       </div>
-      <div id="containerServo" class="productTypeDiv" hidden>
-        <label>
-          <span>Supply Pressure:</span>
+      <div id="containerServo" class="productTypeDiv mb-4" hidden>
+        <div class="mb-4">
+          <span>Supply:</span>
           <select name="servoSupply" id="servoSupply" class="input input-bordered">
             <option value="A">500 to 3000 psi</option>
             <option value="C">200 to 1000 psi</option>
@@ -145,10 +158,10 @@
             <option value="G">500 to 3000 psi w/o cylinder port orifices
 and with pilot drain</option>
           </select>
-        </label>
+        </div>
       </div>
-      <div id="containerMCH" class="productTypeDiv" hidden>
-        <label>
+      <div id="containerMCH" class="productTypeDiv mb-4" hidden>
+        <div class="mb-4">
           <span>Mounting:</span>
           <select name="modelType" id="modelType" class="input input-bordered">
             <option value="1">Base (surface) mount aluminum case</option>
@@ -157,24 +170,24 @@ and with pilot drain</option>
             <option value="4">Panel mount with plastic case</option>
             <option value="5">Panel mount without plastic case</option>
           </select>
-        </label>
+        </div>
       </div>
     </div>
-    <div id="containerMoog" class="manufacturerDiv" hidden>
-      <label>
-        <span>Product Type:</span>
-        <select name="moogProductType" id="moogProductType" class="productTypeSelect input input-bordered">
-          <option value="pumpControl">Pump Control</option>
-          <option value="servo">Servo</option>
-        </select>
-      </label>
+    <div id="containerMoog" class="manufacturerDiv mb-4" hidden>
+      <span>Product Type:</span>
+      <select name="moogProductType" id="moogProductType" class="productTypeSelect input input-bordered">
+        <option value="pumpControl">Pump Control</option>
+        <option value="servo">Servo</option>
+      </select>
     </div>
   </div>
   
   <hr class="mb-10">
-
-  <div id="resultProductsDiv">
-    <ul id="resultProductsList"></ul>
+  <div class="mt-12 mb-10 mx-5 lg:mx-24">
+    <div id="resultProductsDiv" class="mb-10">
+      <h2 class="pb-4">Search Results:</h2>
+      <ul id="resultProductsList"></ul>
+    </div>
   </div>
   
 </div>

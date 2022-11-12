@@ -1,0 +1,88 @@
+mongoimport --uri "mongodb+srv://peterluitjens:n3iBwu5K1k69NXZ@cluster0.mtimiyi.mongodb.net/mcgowan?retryWrites=true&w=majority" --collection pilots --type CSV --drop --file /mcv116.csv
+
+{"_id":{"$oid":"6366de60063d934f1b54fcdd"},"modelNumber":"MCV110A1017","prefix":110,"revisionLetter":"A","connectorNumber":17}
+{"_id":{"$oid":"6366e68e063d934f1b54fcde"},"modelNumber":"MCV110A1058","prefix":110,"revisionLetter":"A","connectorNumber":58}
+{"_id":{"$oid":"6366e6b8063d934f1b54fce0"},"modelNumber":"MCV110A1014","prefix":"110","revisionLetter":"A","connectorNumber":"14"}
+{"_id":{"$oid":"6366e82f063d934f1b54fce1"},"modelNumber":"MCV110A1059","prefix":"110","revisionLetter":"A","connectorNumber":"59"}
+{"_id":{"$oid":"6366e84b063d934f1b54fce2"},"modelNumber":"MCV110A1090","prefix":"110","revisionLetter":"A","connectorNumber":"90"}
+{"_id":{"$oid":"6366e85a063d934f1b54fce3"},"modelNumber":"MCV110A1000","prefix":"110","revisionLetter":"A","connectorNumber":"00"}
+
+
+
+
+MCV116A1100
+MCV116A1101
+MCV116A1102
+MCV116A1201
+MCV116A1203
+MCV116A1204
+MCV116A1301
+MCV116A1302
+MCV116A1307
+MCV116A1401
+MCV116A1402
+MCV116A1407
+MCV116A1501
+MCV116A2100
+MCV116A2101
+MCV116A2102
+MCV116A3101
+MCV116A3102
+MCV116A3105
+MCV116A3201
+MCV116A3203
+MCV116A3204
+MCV116A3206
+MCV116A3501
+MCV116A3502
+MCV116A3602
+MCV116A4201
+MCV116A4204
+MCV116F3112
+MCV116F3113
+MCV116F4201
+MCV116F4204
+MCV116F4211
+MCV116G4201
+MCV116G4204
+MCV116G4211
+MCV116G4213
+MCV116G4214
+MCV116C1101
+MCV116C1201
+MCV116C3101
+MCV116C3201
+MCV116C1401
+Units 5 & 21 are configured with two 2-pin connectors, one for the A/B coil and one for the C/D coil.
+Unit 24 is used on all EDCs with a current range of 4-20 mA, with the exception of the Series 42, which has no removable PCP.
+Unit 30 has only 2 lead wires terminating into the 4-pin connector
+Units 33, 36 & 37 do not have a manual override.
+Units 34 - 37 are the result of a product improvement (see PIB 9810 & SB 99001) and should be used with the KVEB style of EDC.
+Unit 43 is used on Series 90 EDCs that are Intrinsically Safe with a current range of 4-20 mA.0 to 100
+0 to 130
+0 to 20
+
+
+The MCV116 Pressure Control Pilot is specified through a
+logical part number as follows: MCV116 X X X XX
+DEVICE IDENTITY
+CONFIGURATION
+A. Standard Control
+TYPE (See Table A)
+1. Typical use, flow and pressure control
+2. Typical use, stand alone
+3. Typical use, EDC
+COIL TYPE
+1. Single coil (23 ohm)
+2. Dual coil (15.5, 19 ohm)
+3. Single coil (69 ohm)
+4. Single coil (106 ohm)
+5. Single coil (643 ohm)
+CONNECTOR STYLE
+00. None (Pigtail)
+01. MS
+02. Packard 2 pin Weather Pack
+03. Packard twin 2 pin Weather Pack
+04. Packard 4 pin Weather Pack
+05. Packard 2 pin Metri-Pack
+06. Packard 4 pin Metri-Pack
