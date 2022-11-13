@@ -6,7 +6,7 @@
       <p><strong>Email</strong>: <%= user.email %></p>
     </div>
   </div>
-  <div class="mt-12 mb-10 mx-5 lg:mx-24 menu">
+  <div class="mt-12 mx-5 lg:mx-24 menu">
     <div class="mb-4">
       <span>Manufacturer: </span>
       <input type="radio" name="manufacturer" value="Danfoss" id="danfoss"/> 
@@ -26,7 +26,7 @@
           <option value="MCH">Control Handle (MCH)</option>
         </select>
       </div>
-      <div id="containerPCP" class="productTypeDiv mb-4" hidden>
+      <div id="containerPCP" class="productTypeDiv" hidden>
         <div class="mb-4">
           <span>Model:</span>
           <select name="modelPrefixPCP" id="modelTypePCP" class="input input-bordered">
@@ -36,22 +36,32 @@
           </select>
         </div>
         <div id="container110" class="pilotDiv" hidden>
-          <div class="mb-4">
-            <span>Connector:</span>
-            <select name="connectorType" id="connectorType" class="input input-bordered">
-              <option value="all" selected>All</option>
-              <option value="0">None</option>
-              <!-- <option value="09">MS</option> -->
-              <option value="14">Deutsch 4-pin plug DT series</option>
-              <option value="17">MS</option>
-              <option value="58">Packard Weather-pack 4-pin shroud</option>
-              <option value="59">Packard Weather-pack 4-pin shroud 15 inch lead</option>
-              <option value="90">Packard Metri-pack 4-pin 150 series male</option>
-            </select>
+          <hr class="mb-4">
+          <div class="flex justify-evenly">
+            <div class="flex flex-col justify-between">
+              <div>
+                <span>Connector:</span>
+                <select name="connectorType" id="connectorType" class="input input-bordered">
+                  <option value="all" selected>All</option>
+                  <option value="0">None</option>
+                  <!-- <option value="09">MS</option> -->
+                  <option value="14">Deutsch 4-pin plug DT series</option>
+                  <option value="17">MS</option>
+                  <option value="58">Packard Weather-pack 4-pin shroud</option>
+                  <option value="59">Packard Weather-pack 4-pin shroud 15 inch lead</option>
+                  <option value="90">Packard Metri-pack 4-pin 150 series male</option>
+                </select>
+              </div>
+              <button class="btn btn-primary" id="button110">Search</button>
+            </div>
+            <figure class="mx-4">
+              <img src="/images/MCV110.png" alt="MCV110 Pilot Valve">
+            </figure>
           </div>
-          <button class="btn btn-primary" id="button110">Search</button>
         </div>
-        <div id="container116" class="pilotDiv mb-4" hidden>
+        <div id="container116" class="pilotDiv" hidden>
+          <hr class="mb-4">
+
           <div class="flex justify-evenly">
             <div>
               <img src="/images/MCV116_Config.png" alt="MCV116 Configuration Chart" class="mb-4">
@@ -61,11 +71,14 @@
                 <select name="revType" id="revType" class="input input-bordered">
                   <option value="all" selected>All</option>
                   <option value="A">A</option>
+                  <option value="B">B</option>
                   <option value="C">C</option>
+                  <option value="E">E</option>
                   <option value="F">F</option>
                   <option value="G">G</option>
                   <option value="H">H</option>
                   <option value="J">J</option>
+                  <option value="K">K</option>
                   <option value="M">M</option>
                 </select>
               </div>
@@ -95,20 +108,23 @@
                 <span>Connector:</span>
                 <select name="connectorType" id="connectorType" class="input input-bordered">
                   <option value="all" selected>All</option>
-                  <option value="0">None</option>
-                  <option value="0">Lead wires only, 4 inch</option>
-                  <option value="1">MS</option>
-                  <option value="2">Packard Weather-pack 2-pin shroud</option>
-                  <option value="3">Twin Packard Weather-pack 2-pin shroud</option>
-                  <option value="4">Packard Weather-pack 4-pin shroud</option>
-                  <option value="5">Packard Metri-pack 2-pin 280 series male</option>
-                  <option value="6">Packard Metri-pack 4-pin (5 cavity) 280 series male</option>
-                  <option value="7">MS with jumper from B to D pins</option>
-                  <option value="11">Packard Metri-pack 4-pin 150 series female</option>
-                  <option value="12">Packard Metri-pack 2-pin 150 series male</option>
-                  <option value="13">Packard Metri-pack 4-pin 150 series male</option>
-                  <option value="14">Deutsch 4-pin plug DT series</option>
-                  <option value="18">Deutsch 2-pin plug DT series</option>
+                  <option value="0">00 - None</option>
+                  <option value="0">00 - Lead wires only, 4 inch</option>
+                  <option value="1">01 - MS</option>
+                  <option value="2">02 - Packard Weather-pack 2-pin shroud</option>
+                  <option value="3">03 - Twin Packard Weather-pack 2-pin shroud</option>
+                  <option value="4">04 - Packard Weather-pack 4-pin shroud</option>
+                  <option value="5">05 - Packard Metri-pack 2-pin 280 series male</option>
+                  <option value="6">06 - Packard Metri-pack 4-pin (5 cavity) 280 series male</option>
+                  <option value="7">07 - MS with jumper from B to D pins</option>
+                  <option value="09">09 - Packard Weather-pack 4-pin shroud 9.5 inch lead</option>
+                  <option value="11">11 - No Manual Operator, Packard Metri-pack 4-pin 150 series female</option>
+                  <option value="12">12 - Packard Metri-pack 2-pin 150 series male</option>
+                  <option value="13">13 - Packard Metri-pack 4-pin 150 series male</option>
+                  <option value="14">14 - Deutsch 4-pin plug DT series</option>
+                  <option value="16">16 - No Manual Operator, Deutsch 4-pin plug DT series</option>
+                  <option value="17">17 - No Manual Operator, Packard Weather-pack 4-pin shroud</option>
+                  <option value="18">18 - Deutsch 2-pin plug DT series</option>
                 </select>
               </div>
               <div class="mb-4">
@@ -118,6 +134,7 @@
                   <option value="IS">Intrinsically Safe</option>
                   <option value="KVF">Servo - KVF</option>
                   <option value="102">Servo - MCV102</option>
+                  <option value="Daikin">Daikin</option>
                   <option value="4-20">EDC all 4-20 mA</option>
                   <option value="S-20|M-46">EDC Series-20</option>
                   <option value="S-20|M-46">EDC M-46</option>
@@ -182,8 +199,8 @@ and with pilot drain</option>
     </div>
   </div>
   
-  <hr class="mb-10">
-  <div class="mt-12 mb-10 mx-5 lg:mx-24">
+  <div class="mb-10 mx-5 lg:mx-24">
+    <hr class="mb-10">
     <div id="resultProductsDiv" class="mb-10">
       <h2 class="pb-4">Search Results:</h2>
       <ul id="resultProductsList"></ul>

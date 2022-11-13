@@ -39,6 +39,7 @@ function switchProductType(e) {
     prodContainer.hidden = !prodContainer.hidden
     currentPath = currentPath.slice(0, 1)
     currentPath.push(e.target.value)
+    clearResultProductsList()
     console.log(currentPath)
 }
 
@@ -49,6 +50,7 @@ function switchModelTypePCP(e) {
     pilotContainer.hidden = !pilotContainer.hidden
     currentPath = currentPath.slice(0, 2)
     currentPath.push(e.target.value)
+    clearResultProductsList()
     console.log(currentPath)
 }
 
@@ -58,12 +60,20 @@ function hide(elements) {
     })
 }
 
+function clearResultProductsList() {
+    while (resultProductsList.firstChild) {
+        resultProductsList.removeChild(resultProductsList.firstChild)
+    }
+}
+
 document.querySelector('#button110').addEventListener('click', searchForProducts)
 document.querySelector('#button116').addEventListener('click', searchForProducts)
 
 async function searchForProducts(e) {
     const parentContainer = e.target.parentNode
-    let modelPrefix = parentContainer.id.slice(-3)
+    
+    let modelPrefix = e.target.id.slice(-3)
+    console.log(modelPrefix)
     const selectCollection = parentContainer.querySelectorAll('select')
     const selectArray = Array.from(selectCollection)
     const selectValues = selectArray.map(select => select.value)
@@ -72,9 +82,7 @@ async function searchForProducts(e) {
     const response = await fetch(`/productID/pilot?modelPrefixPCP=${modelPrefix}&selectValues=${selectValues}`)
     const searchResults = await response.json()
     console.log(searchResults)
-    while (resultProductsList.firstChild) {
-        resultProductsList.removeChild(resultProductsList.firstChild)
-    }
+    clearResultProductsList()
     if (searchResults.length === 0) {
         const li = document.createElement('li')
         li.textContent = 'No products match those criteria.'
