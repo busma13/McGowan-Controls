@@ -18,7 +18,12 @@ require('dotenv').config({path: './config/.env'})
 // Passport config
 require('./config/passport')(passport)
 
-connectDB()
+connectDB().then(() => {
+  app.listen(process.env.PORT, ()=>{
+    console.log(`Server is running on port ${process.env.PORT}.`)
+  })    
+})
+
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
@@ -50,6 +55,3 @@ app.use('/priceLists', priceListsRoutes)
 app.use('/portal', portalRoutes)
 app.use('/productID', productIDRoutes)
  
-app.listen(process.env.PORT, ()=>{
-    console.log(`Server is running on port ${process.env.PORT}.`)
-})    
