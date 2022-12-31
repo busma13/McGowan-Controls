@@ -19,3 +19,7 @@ td > div {
     display: inline-block;
     width: 286px;
 }
+
+.job-creator-modal-action {
+    flex-direction: column;
+}

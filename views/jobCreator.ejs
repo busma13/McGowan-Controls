@@ -1,0 +1,226 @@
+<%- include('partials/header') -%>
+<div class="container mx-auto">
+  <div class="flex justify-center lg:justify-end mb-24 mx-2">
+    <div>
+      <p><strong>Employee Name</strong>: <%= user.userName %></p>
+      <p><strong>Email</strong>: <%= user.email %></p>
+    </div>
+  </div>
+  <div class="mb-10 lg:mx-24">
+    
+  </div>
+  <!-- <hr class="mb-10"> -->
+  <div class="input-group input-group-vertical mb-2">
+    <span>Customer:</span>
+    <select name="customer" id="customer" class="input">
+<%    if (customerList.length > 0) {
+        customerList.forEach( el => { %>
+          <option value="<%=el.companyName%>"><%=el.companyName%></option>
+<%      })
+      } else { %>
+        <option value="" selected disabled>Please Add A Customer</option>
+<%    } %>
+    </select>
+    <button id="addCustomer">Add Customer</button>
+  </div>
+  <div class="input-group input-group-vertical mb-2">
+    <span>Units:</span>
+    <table id="units-table">
+      <thead>
+          <tr>
+            <th>Manufacturer</th>
+            <th>Model Number</th>
+            <th>Serial Number</th>
+            <th>Status</th>
+            <th>Price</th>
+            <th>Sale Type</th>
+            <th>Core Exchange</th>
+            <th>Comments</th>
+          </tr>
+      </thead>
+      <tbody id="units-table-body">
+        <tr>
+          <td id="no-units">No units yet</td> 
+        </tr>
+      </tbody>  
+    </table>
+    <button id="addUnit">Add Unit</button>
+  </div>
+  <form action="/jobs/createJob" method="POST" class="flex flex-col items-center">
+    <label class="input-group input-group-vertical mb-2">
+      <span>Incoming Date:</span>
+      <input type="date"  id="incomingDate" name="inDate" class="input input-bordered" required/>
+    </label>
+    <label class="input-group input-group-vertical mb-2">
+      <span>PO Number:</span>
+      <input type="text"  id="poNumber" name="poNumber" placeholder="PO Number" class="input input-bordered"/>
+    </label>
+    <label class="input-group input-group-vertical mb-2">
+      <span>Reference Number:</span>
+      <input type="text"  id="refNumber" name="refNumber" placeholder="Reference Number" class="input input-bordered"/>
+    </label>
+    <label class="input-group input-group-vertical mb-2">
+      <span>Shipped Date:</span>
+      <input type="date"  id="shipped" name="shipped" class="input input-bordered"/>
+    </label>
+    <label class="input-group input-group-vertical mb-2">
+      <span>Shipped Via:</span>
+      <input type="text"  id="shippedVia" name="shippedVia" placeholder="Shipment Type" class="input input-bordered"/>
+    </label>
+    <label class="input-group input-group-vertical mb-2">
+      <span>Shipping Weight (lbs):</span>
+      <input type="number"  id="shippingWeight" name="shippingWeight" placeholder="Weight" class="input input-bordered"/>
+    </label>
+    <label class="input-group input-group-vertical mb-2">
+      <span>Invoiced:</span>
+      <select name="customer" id="customer" class="input">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+      </select>
+    </label>
+    <label class="input-group input-group-vertical mb-2">
+      <span>Comments:</span>
+      <textarea id="comments" name="comments" placeholder="Add comment" class="input input-bordered"></textarea>
+    </label>
+    <input type="hidden"  id="company" name="company" value="">
+    <input type="hidden"  id="quantity" name="quantity" value="0">
+
+    <button type="submit" class="btn btn-primary mt-3">Add</button>
+  </form>
+  <!-- <div class="flex flex-wrap items-center justify-center mb-10">
+      <div class="card card-bordered border-white w-96 glass">
+        <div class="card-body items-center">
+          <h2 class="card-title">Add Item</h2>
+          <div class="card-actions justify-end">
+            
+          </div>
+        </div>
+      </div>
+  </div>     -->
+</div>
+
+<!-- Add Customer Modal-->
+<input type="checkbox" id="add-customer-modal-checkbox" class="modal-toggle" />
+<div id="add-customer-modal" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg text-center ">Add Customer</h3>
+    <div class="modal-action job-creator-modal-action">
+      <form action="/jobs/createCustomer" method="POST" class="col-3">
+        <label class="input-group input-group-vertical mb-2">
+          <span>Company Name:</span>
+          <input type="text" id="companyName" name="companyName" class="input input-bordered"/>  
+        </label>
+        <label class="input-group input-group-vertical mb-2">
+          <span>Shipping Address:</span>
+          <input type="text" id="shippingAddress" name="shippingAddress" class="input input-bordered"/>
+        </label>
+        <label class="input-group input-group-vertical mb-2">
+          <span>Billing Address:</span>
+          <input type="text" id="billingAddress" name="billingAddress" class="input input-bordered"/> 
+        </label>
+        <label class="input-group input-group-vertical mb-2">
+          <span>Contact:</span>
+          <input type="text" id="contact" name="contact" class="input input-bordered"/>
+        </label>
+        <label class="input-group input-group-vertical mb-2">
+          <span>Telephone Number:</span>
+          <input type="tel" id="tel" name="tel" class="input input-bordered"/>
+        </label>
+        <label class="input-group input-group-vertical mb-2">
+          <span>Fax Number:</span>
+          <input type="tel" id="fax" name="fax" class="input input-bordered"/>
+        </label>
+        <label class="input-group input-group-vertical mb-2">
+          <span>Comments:</span>
+          <textarea name="comments" id="comments" cols="30" rows="10" class="input input-bordered"></textarea>
+        </label>
+        <button type="submit" class="btn btn-rounded btn-danger btn-modal" id="btn-add-customer" data-id="0">Add</button>
+        </form>
+        <button class="btn cancel-add-customer">Cancel</button>
+        <button class="btn clear-add-customer">Clear</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Unit Modal-->
+<input type="checkbox" id="add-unit-modal-checkbox" class="modal-toggle" />
+<div id="add-unit-modal" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg text-center">Add Unit</h3>
+    <div class="modal-action job-creator-modal-action">
+      <form name="createJobUnitForm" action="" class="col-3">
+        <label class="input-group input-group-vertical mb-2">
+          <span>Manufacturer:</span>
+          <input type="text" id="manufacturer" name="manufacturer" class="input input-bordered"/>
+        </label>
+        <label class="input-group input-group-vertical mb-2">
+          <span>Model Number:</span>
+          <input type="text" id="modelNumber" name="modelNumber" class="input input-bordered"/>
+        </label>
+        <label class="input-group input-group-vertical mb-2">
+          <span>Serial Number:</span>
+          <input type="text" id="serialNumber" name="serialNumber" class="input input-bordered"/>
+        </label>
+        <label class="input-group input-group-vertical mb-2">
+          <span>Status:</span>
+          <select id="status" name="status" class="input"/>
+            <option value="toBeEvaluated">To Be Evaluated</option>
+            <option value="approved">Approved</option>
+            <option value="holdForApproval">Hold For Approval</option>
+            <option value="returned">Returned Unrepaired</option>
+            <option value="nfd">N.F.D.</option>
+            <option value="scrap">Scrap</option>
+            <option value="warranty">Warranty</option>
+            <option value="ber">B.E.R.</option>
+          </select>
+        </label>
+        <label class="input-group input-group-vertical mb-2">
+          <span>Price:</span>
+          <input type="number" id="price" name="price" class="input input-bordered"/>
+        </label>
+        <label class="input-group input-group-vertical mb-2">
+          <span>Sale Type:</span>
+          <select name="saleType" id="saleType" class="input">
+            <option value="repair">Repair</option>
+            <option value="reman">Reman</option>
+            <option value="new">New</option>
+          </select>
+        </label>
+        <label class="input-group input-group-vertical mb-2">
+          <span>Core Exchange:</span>
+          <select name="coreExchange" id="coreExchange" class="input">
+            <option value="n/a">N/A</option>
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+          </select>
+        </label>
+        <label class="input-group input-group-vertical mb-2">
+          <span>Comments:</span>
+          <textarea name="comments" id="comments" cols="30" rows="10" class="input input-bordered"></textarea>
+        </label>
+        <button type="submit" class="btn btn-rounded btn-danger btn-modal" id="btn-add-unit" data-id="0">Add</button>
+      </form>
+      <button class="btn cancel-add-unit">Cancel</button>
+      <button class="btn clear-add-unit">Clear</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal to confirm item deletion-->
+<!-- <input type="checkbox" id="delete-item-modal" class="modal-toggle" />
+<div class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Delete Item</h3>
+    <p class="py-4">Are you sure you want to delete this item?</p>
+    <div class="modal-action">
+      <button class="btn cancel-delete-item">Cancel</button>
+      <form action="/priceLists/deletePriceListItem/< %= listId %>/" method="POST" class="col-3">
+        <button type="submit" class="btn btn-rounded btn-danger btn-modal" id="btn-delete-item" data-id="0">Delete</button>
+      </form>
+    </div>
+  </div>
+</div> -->
+
+<script src="../js/jobCreator.js"></script>
+<!-- <script src="../js/deleteItemModal.js"></script> -->
+<%- include('partials/footer') -%>

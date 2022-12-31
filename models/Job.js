@@ -12,17 +12,9 @@ const JobSchema = new mongoose.Schema({
         required: true,
     },
     poNumber: Number,
-    referenceNum: Number,
-    quantity: {
-        type: Number,
-        required: true,
-    },
+    refNumber: Number,
     units: {
-        type: Array,//ids from unit db. MFG, Model, S/N
-        required: true,
-    },
-    status: {
-        type: String,
+        type: Array,//ids from unit db. MFG, Model, S/N, price
         required: true,
     },
     shipped: Date,

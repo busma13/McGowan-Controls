@@ -10,6 +10,21 @@ const UnitSchema = new mongoose.Schema({
         required: true,
     },
     serialNumber: String,
+    status: {
+        type: String,
+        required: true,
+    },
+    price: {
+        type: Number,
+    },
+    saleType: {
+        type: String, 
+        required: true,
+    },
+    coreExchange: {
+        type: String,
+        required: true,
+    },
     comments: String,
 })
 

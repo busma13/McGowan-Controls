@@ -12,6 +12,7 @@ const mainRoutes = require('./routes/main')
 const priceListsRoutes = require('./routes/priceLists')
 const portalRoutes = require('./routes/portal')
 const productIDRoutes = require('./routes/productID')
+const jobsRoutes = require('./routes/jobs')
 
 require('dotenv').config({path: './config/.env'})
 
@@ -54,4 +55,5 @@ app.use('/', mainRoutes)
 app.use('/priceLists', priceListsRoutes)
 app.use('/portal', portalRoutes)
 app.use('/productID', productIDRoutes)
+app.use('/jobs', jobsRoutes)
  
