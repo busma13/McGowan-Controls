@@ -8,11 +8,11 @@ const JobSchema = new mongoose.Schema({
     },
     jobNumber: Number,
     customer: {
-        type: Number,//id from customer db 
+        type: String, 
         required: true,
     },
-    poNumber: Number,
-    refNumber: Number,
+    poNumber: String,
+    refNumber: String,
     units: {
         type: Array,//ids from unit db. MFG, Model, S/N, price
         required: true,

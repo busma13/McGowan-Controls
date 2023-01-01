@@ -13,9 +13,10 @@
   <div class="input-group input-group-vertical mb-2">
     <span>Customer:</span>
     <select name="customer" id="customer" class="input">
-<%    if (customerList.length > 0) {
-        customerList.forEach( el => { %>
-          <option value="<%=el.companyName%>"><%=el.companyName%></option>
+<%    if (customerList.length > 0) { %>
+        <option value="" selected disabled>Please Select A Customer</option>
+        <% customerList.forEach( el => { %>
+          <option value="<%=el.companyName%>" data-id="<%= el._id%>"><%=el.companyName%></option>
 <%      })
       } else { %>
         <option value="" selected disabled>Please Add A Customer</option>
@@ -28,6 +29,7 @@
     <table id="units-table">
       <thead>
           <tr>
+            <th></th>
             <th>Manufacturer</th>
             <th>Model Number</th>
             <th>Serial Number</th>
@@ -46,7 +48,7 @@
     </table>
     <button id="addUnit">Add Unit</button>
   </div>
-  <form action="/jobs/createJob" method="POST" class="flex flex-col items-center">
+  <form action="/jobs/createJob" method="POST" onsubmit="return validateCreateJobForm()" class="flex flex-col items-center">
     <label class="input-group input-group-vertical mb-2">
       <span>Incoming Date:</span>
       <input type="date"  id="incomingDate" name="inDate" class="input input-bordered" required/>
@@ -73,30 +75,22 @@
     </label>
     <label class="input-group input-group-vertical mb-2">
       <span>Invoiced:</span>
-      <select name="customer" id="customer" class="input">
+      <select name="Invoiced" id="invoiced" class="input">
         <option value="No">No</option>
         <option value="Yes">Yes</option>
       </select>
     </label>
     <label class="input-group input-group-vertical mb-2">
       <span>Comments:</span>
-      <textarea id="comments" name="comments" placeholder="Add comment" class="input input-bordered"></textarea>
+      <textarea id="jobComments" name="jobComments" placeholder="Add comment" class="input input-bordered"></textarea>
     </label>
     <input type="hidden"  id="company" name="company" value="">
+    <input type="hidden"  id="units" name="units" value="">
     <input type="hidden"  id="quantity" name="quantity" value="0">
 
     <button type="submit" class="btn btn-primary mt-3">Add</button>
+    <span id="validationMessage"></span>
   </form>
-  <!-- <div class="flex flex-wrap items-center justify-center mb-10">
-      <div class="card card-bordered border-white w-96 glass">
-        <div class="card-body items-center">
-          <h2 class="card-title">Add Item</h2>
-          <div class="card-actions justify-end">
-            
-          </div>
-        </div>
-      </div>
-  </div>     -->
 </div>
 
 <!-- Add Customer Modal-->
@@ -132,7 +126,7 @@
         </label>
         <label class="input-group input-group-vertical mb-2">
           <span>Comments:</span>
-          <textarea name="comments" id="comments" cols="30" rows="10" class="input input-bordered"></textarea>
+          <textarea name="customerComments" id="customerComments" cols="30" rows="10" class="input input-bordered"></textarea>
         </label>
         <button type="submit" class="btn btn-rounded btn-danger btn-modal" id="btn-add-customer" data-id="0">Add</button>
         </form>
@@ -196,7 +190,7 @@
         </label>
         <label class="input-group input-group-vertical mb-2">
           <span>Comments:</span>
-          <textarea name="comments" id="comments" cols="30" rows="10" class="input input-bordered"></textarea>
+          <textarea name="unitComments" id="unitComments" cols="30" rows="10" class="input input-bordered"></textarea>
         </label>
         <button type="submit" class="btn btn-rounded btn-danger btn-modal" id="btn-add-unit" data-id="0">Add</button>
       </form>

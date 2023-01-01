@@ -28,7 +28,6 @@ module.exports = {
     getJobCreator: async (req, res)=>{
         console.log('jobCreator')
         const customerList = await Customer.find()
-        console.log(customerList)
 
         try{
             res.render('jobCreator.ejs',  { user: req.user, pageName: `Job Creator`, url: `jobs/jobCreator`, customerList: customerList })
@@ -39,7 +38,7 @@ module.exports = {
     createJob: async (req, res)=>{
         try{
             console.log(req.body)
-            await Job.create({inDate: req.body.inDate, customer: req.body.customer, poNumber: req.body.poNumber, refNumber: req.body.refNumber, quantity: req.body.quantity, units: req.body.units, shipped: req.body.shipped, invoiced: req.body.invoiced, comments: req.body.comments })
+            await Job.create({inDate: req.body.inDate, customer: req.body.company, poNumber: req.body.poNumber, refNumber: req.body.refNumber, quantity: req.body.quantity, units: req.body.units, shipped: req.body.shipped, invoiced: req.body.invoiced, comments: req.body.jobComments })
             console.log('New job added')
             res.redirect('/jobs')
         }catch(err){
@@ -49,7 +48,7 @@ module.exports = {
     createCustomer: async (req, res)=>{
         try{
             console.log(req.body)
-            await Customer.create({companyName: req.body.companyName, shippingAddress: req.body.shippingAddress, billingAddress: req.body.billingAddress, contact: req.body.contact, tel: req.body.tel, fax: req.body.fax, comments: req.body.comments })
+            await Customer.create({companyName: req.body.companyName, shippingAddress: req.body.shippingAddress, billingAddress: req.body.billingAddress, contact: req.body.contact, tel: req.body.tel, fax: req.body.fax, comments: req.body.customerComments })
             console.log('New customer added')
             res.redirect('/jobs/createJob')
         }catch(err){
@@ -59,7 +58,7 @@ module.exports = {
     createJobUnit: async (req, res)=>{
         try{
             console.log(req.body)
-            await Unit.create({ manufacturer: req.body.manufacturer, modelNumber: req.body.modelNumber, serialNumber: req.body.serialNumber, status: req.body.status, price: req.body.price, saleType: req.body.saleType, coreExchange: req.body.coreExchange, comments: req.body.comments, jobId: req.params.jobId })
+            await Unit.create({ manufacturer: req.body.manufacturer, modelNumber: req.body.modelNumber, serialNumber: req.body.serialNumber, status: req.body.status, price: req.body.price, saleType: req.body.saleType, coreExchange: req.body.coreExchange, comments: req.body.unitComments, jobId: req.params.jobId })
             console.log('Unit added to job')
             // res.redirect(`/jobs/${req.params.jobId}`)
             res.redirect('/jobs/createJob')
