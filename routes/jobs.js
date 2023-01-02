@@ -13,7 +13,7 @@ router.post('/createJob', ensureAuth, jobsController.createJob)
 
 router.post('/createCustomer', ensureAuth, jobsController.createCustomer)
 
-router.post('/createJobUnit/:jobId', ensureAuth, jobsController.createJobUnit)
+// router.post('/createJobUnit/:jobId', ensureAuth, jobsController.createJobUnit)
 
 // router.put('/favoritePriceList/:listId', ensureAuth, jobsController.favoritePriceList)
 

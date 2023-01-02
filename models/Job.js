@@ -14,7 +14,7 @@ const JobSchema = new mongoose.Schema({
     poNumber: String,
     refNumber: String,
     units: {
-        type: Array,//ids from unit db. MFG, Model, S/N, price
+        type: Array,
         required: true,
     },
     shipped: Date,

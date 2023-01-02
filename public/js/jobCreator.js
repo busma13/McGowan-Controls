@@ -129,7 +129,7 @@ function addCreatedUnitToUnitsList(unitObj) {
 }
 
 function updateFormHiddenUnitField() {
-    unitsFormInput.value = JSON.parse(localStorage.getItem('unitsList'))
+    unitsFormInput.value = localStorage.getItem('unitsList')
 }
 
 function updateFormHiddenQuantityField(num) {

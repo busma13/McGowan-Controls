@@ -14,13 +14,11 @@ module.exports = {
     },
     getSingleJob: async (req,res)=>{
         console.log('getSingleJob')
-        console.log(req.user)
         try{
-            const units = await Unit.find({jobId: req.params.jobId}).sort({'manufacturer': 1, 'modelNumber': 1})
             const job = await Job.findById(req.params.jobId)
+            const units = await Unit.find({jobId: job._id}).sort({'manufacturer': 1, 'modelNumber': 1})
             const customer = await Customer.findById(job.customer)
-            console.log(units)
-            res.render('singleJob.ejs',  { user: req.user, pageName: `Job #  - ${job.jobNumber}, ${customer.companyName}`, url: `jobs/${req.params.jobId}`, units: units, customer: customer, jobId: req.params.jobId })
+            res.render('singleJob.ejs',  { user: req.user, pageName: `Job # ${job.jobNumber} - ${customer.companyName}`, url: `jobs/${req.params.jobId}`, units: units, customer: customer, jobId: req.params.jobId })
         }catch(err){
             console.log(err)
         }
@@ -37,8 +35,23 @@ module.exports = {
     },
     createJob: async (req, res)=>{
         try{
-            console.log(req.body)
-            await Job.create({inDate: req.body.inDate, customer: req.body.company, poNumber: req.body.poNumber, refNumber: req.body.refNumber, quantity: req.body.quantity, units: req.body.units, shipped: req.body.shipped, invoiced: req.body.invoiced, comments: req.body.jobComments })
+            console.log(req.body.units)
+            const unitIdArray = []
+            
+            let job = await Job.create({inDate: req.body.inDate, customer: req.body.company, poNumber: req.body.poNumber, refNumber: req.body.refNumber, quantity: req.body.quantity, units: unitIdArray, shipped: req.body.shipped, invoiced: req.body.invoiced, comments: req.body.jobComments })
+            
+            const unitsArray = JSON.parse(req.body.units)
+            console.log(unitsArray)
+
+            for (const obj of unitsArray) {
+                let unit = await Unit.create({ manufacturer: obj.manufacturer, modelNumber: obj.modelNumber, serialNumber: obj.serialNumber, statusValue: obj.statusValue, statusString: obj.statusString, price: obj.price, saleType: obj.saleType, coreExchange: obj.coreExchange, comments: obj.comments, jobId: job._id })
+                console.log(unit._id)
+                console.log('Unit added to job')
+                const unitId = unit._id
+                unitIdArray.push(unitId)
+            }
+
+            await Job.findByIdAndUpdate(job._id, {units: unitIdArray})
             console.log('New job added')
             res.redirect('/jobs')
         }catch(err){
@@ -55,17 +68,17 @@ module.exports = {
             console.log(err)
         }
     },
-    createJobUnit: async (req, res)=>{
-        try{
-            console.log(req.body)
-            await Unit.create({ manufacturer: req.body.manufacturer, modelNumber: req.body.modelNumber, serialNumber: req.body.serialNumber, status: req.body.status, price: req.body.price, saleType: req.body.saleType, coreExchange: req.body.coreExchange, comments: req.body.unitComments, jobId: req.params.jobId })
-            console.log('Unit added to job')
-            // res.redirect(`/jobs/${req.params.jobId}`)
-            res.redirect('/jobs/createJob')
-        }catch(err){
-            console.log(err)
-        }
-    },
+    // createJobUnit: async (req, res)=>{
+    //     try{
+    //         console.log(req.body)
+    //         await Unit.create({ manufacturer: req.body.manufacturer, modelNumber: req.body.modelNumber, serialNumber: req.body.serialNumber, status: req.body.status, price: req.body.price, saleType: req.body.saleType, coreExchange: req.body.coreExchange, comments: req.body.unitComments, jobId: req.params.jobId })
+    //         console.log('Unit added to job')
+    //         // res.redirect(`/jobs/${req.params.jobId}`)
+    //         res.redirect('/jobs/createJob')
+    //     }catch(err){
+    //         console.log(err)
+    //     }
+    // },
     // favoritePriceList: async (req, res)=>{
     //     try {
     //         if (req.query.favorited === 'true') {
@@ -98,7 +111,7 @@ module.exports = {
     // },
     deleteJob: async (req, res)=>{
         try{
-            await Job.findByIdAndRemove(req.params.listId)
+            await Job.findByIdAndRemove(req.params.jobId)
             console.log('Deleted Job')
             res.redirect('/jobs')
         }catch(err){

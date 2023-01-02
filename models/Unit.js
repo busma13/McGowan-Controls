@@ -10,7 +10,11 @@ const UnitSchema = new mongoose.Schema({
         required: true,
     },
     serialNumber: String,
-    status: {
+    statusValue: {
+        type: String,
+        required: true,
+    },
+    statusString: {
         type: String,
         required: true,
     },
@@ -26,6 +30,10 @@ const UnitSchema = new mongoose.Schema({
         required: true,
     },
     comments: String,
+    jobId: {
+        type: String,
+        required: true,
+    }
 })
 
 module.exports = mongoose.model('Unit', UnitSchema)
