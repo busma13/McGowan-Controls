@@ -25,7 +25,7 @@
         </thead>
         <tbody id="units-table-body">
           <% units.forEach( (el, i) => {%>
-            <tr id="< %= el.id %>">
+            <tr id="<%= el.id %>">
               <td class="align-top text-center p-3">
                 <button
                   class="btn modal-button item-modal-button fa fa-trash"
@@ -71,14 +71,14 @@
   <div class="modal-box">
     <h3 class="font-bold text-lg text-center">Add Unit</h3>
     <div class="modal-action job-creator-modal-action">
-      <form name="createJobUnitForm" action="" class="col-3">
+      <form name="createJobUnitForm" action="createJobUnit/<%= jobId %>" method="POST" class="col-3">
         <label class="input-group input-group-vertical mb-2">
           <span>Manufacturer:</span>
-          <input type="text" id="manufacturer" name="manufacturer" class="input input-bordered"/>
+          <input type="text" id="manufacturer" name="manufacturer" class="input input-bordered" required/>
         </label>
         <label class="input-group input-group-vertical mb-2">
           <span>Model Number:</span>
-          <input type="text" id="modelNumber" name="modelNumber" class="input input-bordered"/>
+          <input type="text" id="modelNumber" name="modelNumber" class="input input-bordered" required/>
         </label>
         <label class="input-group input-group-vertical mb-2">
           <span>Serial Number:</span>
@@ -86,8 +86,8 @@
         </label>
         <label class="input-group input-group-vertical mb-2">
           <span>Status:</span>
-          <select id="status" name="status" class="input"/>
-            <option value="toBeEvaluated">To Be Evaluated</option>
+          <select id="statusValue" name="statusValue" class="input"/>
+            <option value="toBeEvaluated" selected>To Be Evaluated</option>
             <option value="approved">Approved</option>
             <option value="holdForApproval">Hold For Approval</option>
             <option value="returned">Returned Unrepaired</option>
@@ -97,6 +97,7 @@
             <option value="ber">B.E.R.</option>
           </select>
         </label>
+        <input type="hidden"  id="statusString" name="statusString" value="To Be Evaluated">
         <label class="input-group input-group-vertical mb-2">
           <span>Price:</span>
           <input type="number" id="price" name="price" class="input input-bordered"/>
