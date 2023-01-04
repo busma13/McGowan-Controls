@@ -13,12 +13,13 @@ const JobSchema = new mongoose.Schema({
     },
     poNumber: String,
     refNumber: String,
+    shippedVia: String,
+    shippingWeight: Number,
     units: {
         type: Array,
         required: true,
     },
-    shipped: Date,
-    invoiced: Boolean,
+    invoiced: String,
     comments: String,
 })
 JobSchema.plugin(AutoIncrement, {inc_field: 'jobNumber', start_seq: 10001});

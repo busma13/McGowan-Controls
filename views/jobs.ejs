@@ -12,17 +12,14 @@
     <ul>
       <% jobs.forEach( (el, i) => { %>
         <li class='priceList flex justify-between items-center border-2 border-secondary mb-4 py-2  ' data-id='<%= el._id %>'>
-          <div class="flex items-center">
-            <!-- <form action="/priceLists/favoritePriceList/<%= el._id %>?_method=PUT&favorited=<%= el.favorite %>" method="POST" class="col-3">
-              <% if (el.favorite) { %>
-                <button class="text-warning my-2 mx-2 fa fa-star" type="submit"></button>
-              <% } else { %>
-                <button class="my-2 mx-2 fa fa-star" type="submit"></button>
-              <% } %>
-            </form> -->
-            <a href="/jobs/<%= el._id %>"><span class='priceListName text-2xl break-all'><%= el.jobNumber %></span></a>
-          </div>
-          
+          <a href="/jobs/<%= el._id %>">
+            <div class="flex items-center">
+              <span class='jobNumber text-2xl break-all'><%= el.jobNumber %></span>
+              <span>AS OF: <%= el.inDate.toLocaleDateString() %></span>
+              <span>CUSTOMER PO #: <%= el.poNumber %></span>
+              <span>CUSTOMER REF #: <%= el.refNumber %></span>
+            </div>
+          </a>
           <button class="btn modal-button list-modal-button fa fa-trash mx-2" data-id='<%= el._id %>'></button>
         </li>
       <% }) %>    

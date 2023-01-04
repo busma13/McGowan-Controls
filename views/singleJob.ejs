@@ -6,6 +6,24 @@
       <p><strong>Email</strong>: <%= user.email %></p>
     </div>
   </div>
+  <div>
+    <span>AS OF: <%= jobObject.inDate.toLocaleDateString() %></span>
+    <span>SHIP TO: <%= customerObject.companyName %></span>
+    <span>ADDRESS: <%= customerObject.shippingAddress %></span>
+    <span>ATTN: <%= customerObject.contact %></span>
+    <span>TELE #: <%= customerObject.tel %></span>
+    <span>FAX #: <%= customerObject.fax %></span>
+    <span>BILL TO: <%= customerObject.companyName %></span>
+    <span>ADDRESS: <%= customerObject.billingAddress %></span>
+
+    <span>CUSTOMER PO #: <%= jobObject.poNumber %></span>
+    <span>CUSTOMER REF #: <%= jobObject.refNumber %></span>
+    <span>SHIP VIA: <%= jobObject.shippedVia %></span>
+    <span>WEIGHT: <%= jobObject.shippingWeight %></span>
+    <span>INVOICED: <%= jobObject.invoiced %></span>
+    <span>COMMENTS: <%= jobObject.comments %></span>
+
+  </div>
   <div class="mb-10 lg:mx-24">
     <div class="input-group input-group-vertical mb-2">
       <span>Units:</span>
@@ -20,15 +38,15 @@
               <th>Price</th>
               <th>Sale Type</th>
               <th>Core Exchange</th>
-              <th>Comments</th>
+              <th>Ship Date</th>
             </tr>
         </thead>
-        <tbody id="units-table-body">
+        <tbody id="units-table-body" data-jobId="<%=jobObject.jobId%>">
           <% units.forEach( (el, i) => {%>
             <tr id="<%= el.id %>">
               <td class="align-top text-center p-3">
                 <button
-                  class="btn modal-button item-modal-button fa fa-trash"
+                  class="btn modal-button delete-unit-button fa fa-trash"
                   data-id="< %= el.id  %>"
                 ></button>
               </td>
@@ -54,9 +72,10 @@
                 <div><%= el.coreExchange %></div>
               </td>
               <td class="comments align-top can-edit text-center p-3">
-                <%= el.comments %>
+                <%= el.shipped.toLocaleDateString() %>
               </td>
             </tr>
+            <tr><td>Comments: </td><td><%= el.comments %></td></tr>
           <% }) %>
         </tbody>  
       </table>
@@ -71,7 +90,7 @@
   <div class="modal-box">
     <h3 class="font-bold text-lg text-center">Add Unit</h3>
     <div class="modal-action job-creator-modal-action">
-      <form name="createJobUnitForm" action="createJobUnit/<%= jobId %>" method="POST" class="col-3">
+      <form name="createJobUnitForm" action="createJobUnit/<%= jobObject.jobId %>" method="POST" class="col-3">
         <label class="input-group input-group-vertical mb-2">
           <span>Manufacturer:</span>
           <input type="text" id="manufacturer" name="manufacturer" class="input input-bordered" required/>
@@ -129,20 +148,21 @@
     </div>
   </div>
 </div>
+
 <!-- Modal to confirm item deletion-->
-<!-- <input type="checkbox" id="delete-item-modal" class="modal-toggle" />
-<div class="modal modal-bottom sm:modal-middle">
+<input type="checkbox" id="delete-unit-modal-checkbox" class="modal-toggle" />
+<div id="delete-unit-modal" class="modal modal-bottom sm:modal-middle">
   <div class="modal-box">
-    <h3 class="font-bold text-lg">Delete Item</h3>
-    <p class="py-4">Are you sure you want to delete this item?</p>
+    <h3 class="font-bold text-lg">Delete Unit</h3>
+    <p class="py-4">Are you sure you want to delete this unit?</p>
     <div class="modal-action">
-      <button class="btn cancel-delete-item">Cancel</button>
-      <form action="/priceLists/deletePriceListItem/< %= listId %>/" method="POST" class="col-3">
-        <button type="submit" class="btn btn-rounded btn-danger btn-modal" id="btn-delete-item" data-id="0">Delete</button>
+      <button class="btn cancel-delete-unit">Cancel</button>
+      <form action="/jobs/deleteJobUnit/<%= jobObject.jobId %>/" method="POST" class="col-3">
+        <button type="submit" class="btn btn-rounded btn-danger btn-modal" id="btn-delete-unit" data-id="0">Delete</button>
       </form>
     </div>
   </div>
-</div> -->
+</div>
 
 <script src="../js/singleJob.js"></script>
 <%- include('partials/footer') -%>

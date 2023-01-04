@@ -17,10 +17,8 @@ module.exports = {
         try{
             const job = await Job.findById(req.params.jobId)
             const units = await Unit.find({jobId: job._id}).sort({'manufacturer': 1, 'modelNumber': 1})
-            const unitIds = units.map(unit => unit._id)
-            console.log(unitIds)
             const customer = await Customer.findById(job.customer)
-            res.render('singleJob.ejs',  { user: req.user, pageName: `Job # ${job.jobNumber} - ${customer.companyName}`, url: `jobs/${req.params.jobId}`, units: units, customer: customer, jobId: req.params.jobId })
+            res.render('singleJob.ejs',  { user: req.user, pageName: `Job # ${job.jobNumber} - ${customer.companyName}`, url: `jobs/${req.params.jobId}`, units: units, customerObject: customer, jobObject: job })
         }catch(err){
             console.log(err)
         }
@@ -37,16 +35,15 @@ module.exports = {
     },
     createJob: async (req, res)=>{
         try{
-            // console.log(req.body.units)
+            console.log(req.body)
             const unitIdArray = []
             
-            let job = await Job.create({inDate: req.body.inDate, customer: req.body.company, poNumber: req.body.poNumber, refNumber: req.body.refNumber, quantity: req.body.quantity, units: unitIdArray, shipped: req.body.shipped, invoiced: req.body.invoiced, comments: req.body.jobComments })
+            let job = await Job.create({inDate: req.body.inDate, customer: req.body.company, poNumber: req.body.poNumber, refNumber: req.body.refNumber, quantity: req.body.quantity, units: unitIdArray, shippedVia: req.body.shippedVia, shippingWeight: req.body.shippingWeight, invoiced: req.body.invoiced, comments: req.body.jobComments })
             
             const unitsArray = JSON.parse(req.body.units)
-            // console.log(unitsArray)
 
             for (const obj of unitsArray) {
-                let unit = await Unit.create({ manufacturer: obj.manufacturer, modelNumber: obj.modelNumber, serialNumber: obj.serialNumber, statusValue: obj.statusValue, statusString: obj.statusString, price: obj.price, saleType: obj.saleType, coreExchange: obj.coreExchange, comments: obj.comments, jobId: job._id })
+                let unit = await Unit.create({ manufacturer: obj.manufacturer, modelNumber: obj.modelNumber, serialNumber: obj.serialNumber, statusValue: obj.statusValue, statusString: obj.statusString, price: obj.price, saleType: obj.saleType, coreExchange: obj.coreExchange, shipped: obj.shipped, comments: obj.comments, jobId: job._id })
                 // console.log(unit._id)
                 console.log('Unit added to job')
                 const unitId = unit._id
@@ -75,7 +72,7 @@ module.exports = {
             console.log(req.body)
             let unit = await Unit.create({ manufacturer: req.body.manufacturer, modelNumber: req.body.modelNumber, serialNumber: req.body.serialNumber, statusValue: req.body.statusValue, statusString: req.body.statusString, price: req.body.price, saleType: req.body.saleType, coreExchange: req.body.coreExchange, comments: req.body.comments, jobId: req.params.jobId })
 
-            await Job.findOneAndUpdate({ _id:req.params.jobId}, { $push: {units: unit._id }}).exec()
+            await Job.findByIdAndUpdate(req.params.jobId, { $push: {units: unit._id }}).exec()
             console.log('Unit added to job')
             res.redirect(`/jobs/${req.params.jobId}`)
         }catch(err){

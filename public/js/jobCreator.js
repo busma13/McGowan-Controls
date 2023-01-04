@@ -91,8 +91,9 @@ function createJobUnitObject() {
     const price = document.getElementById('price').value;
     const saleType = document.getElementById('saleType').value;
     const coreExchange = document.getElementById('coreExchange').value;
+    const shipped = document.getElementById('shipped').value;
     const comments = document.getElementById('unitComments').value;
-    const unitObj = { manufacturer, modelNumber, serialNumber, statusValue, statusString, price, saleType, coreExchange, comments }
+    const unitObj = { manufacturer, modelNumber, serialNumber, statusValue, statusString, price, saleType, coreExchange, shipped, comments }
     // console.log(unitObj)
     return unitObj
 }

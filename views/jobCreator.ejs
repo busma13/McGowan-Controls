@@ -37,6 +37,7 @@
             <th>Price</th>
             <th>Sale Type</th>
             <th>Core Exchange</th>
+            <th>Ship Date</th>
             <th>Comments</th>
           </tr>
       </thead>
@@ -62,10 +63,6 @@
       <input type="text"  id="refNumber" name="refNumber" placeholder="Reference Number" class="input input-bordered"/>
     </label>
     <label class="input-group input-group-vertical mb-2">
-      <span>Shipped Date:</span>
-      <input type="date"  id="shipped" name="shipped" class="input input-bordered"/>
-    </label>
-    <label class="input-group input-group-vertical mb-2">
       <span>Shipped Via:</span>
       <input type="text"  id="shippedVia" name="shippedVia" placeholder="Shipment Type" class="input input-bordered"/>
     </label>
@@ -75,7 +72,7 @@
     </label>
     <label class="input-group input-group-vertical mb-2">
       <span>Invoiced:</span>
-      <select name="Invoiced" id="invoiced" class="input">
+      <select name="invoiced" id="invoiced" class="input">
         <option value="No">No</option>
         <option value="Yes">Yes</option>
       </select>
@@ -187,6 +184,10 @@
             <option value="no">No</option>
             <option value="yes">Yes</option>
           </select>
+        </label>
+        <label class="input-group input-group-vertical mb-2">
+          <span>Shipped Date:</span>
+          <input type="date"  id="shipped" name="shipped" class="input input-bordered"/>
         </label>
         <label class="input-group input-group-vertical mb-2">
           <span>Comments:</span>
