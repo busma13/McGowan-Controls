@@ -16,7 +16,7 @@ const JobSchema = new mongoose.Schema({
     shippedVia: String,
     shippingWeight: Number,
     units: {
-        type: Array,
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Unit' }],
         required: true,
     },
     invoiced: String,

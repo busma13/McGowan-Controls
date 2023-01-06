@@ -30,7 +30,7 @@ const UnitSchema = new mongoose.Schema({
         required: true,
     },
     shipped: Date,
-    comments: String,
+    unitComments: String,
     jobId: {
         type: String,
         required: true,

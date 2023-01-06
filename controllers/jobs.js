@@ -1,13 +1,28 @@
 const Job = require('../models/Job')
 const Unit = require('../models/Unit')
 const Customer = require('../models/Customer')
+const { default: mongoose } = require('mongoose')
 
 module.exports = {
     getJobs: async (req,res)=>{
         // console.log(req.user)
         try{
             const jobs = await Job.find().sort({_id: "desc"})
-            res.render('jobs.ejs',  { user: req.user, pageName: 'Jobs', url: 'jobs', jobs: jobs})
+            const companyNamesPromises = jobs.map(async job => {
+                const customer = await Customer.findById(job.customer).select('companyName').exec()
+                return customer
+            })
+            const companyNames = await Promise.all(companyNamesPromises)
+            // console.log(companyNames)
+            const unitsPromises = jobs.map(async job => {
+                const unitsArray = await Unit.find({ jobId: job._id }, 'manufacturer modelNumber jobId').exec()
+                // console.log(job.jobNumber)
+                // console.log(unitsArray)
+                return unitsArray
+            })
+            const unitsArrays = await Promise.all(unitsPromises)
+            console.log(unitsArrays)
+            res.render('jobs.ejs',  { user: req.user, pageName: 'Jobs', url: 'jobs', jobs: jobs, companyNames: companyNames, units: unitsArrays})
         }catch(err){
             console.log(err)
         }
@@ -70,7 +85,7 @@ module.exports = {
     createJobUnit: async (req, res)=>{
         try{
             console.log(req.body)
-            let unit = await Unit.create({ manufacturer: req.body.manufacturer, modelNumber: req.body.modelNumber, serialNumber: req.body.serialNumber, statusValue: req.body.statusValue, statusString: req.body.statusString, price: req.body.price, saleType: req.body.saleType, coreExchange: req.body.coreExchange, comments: req.body.comments, jobId: req.params.jobId })
+            let unit = await Unit.create({ manufacturer: req.body.manufacturer, modelNumber: req.body.modelNumber, serialNumber: req.body.serialNumber, statusValue: req.body.statusValue, statusString: req.body.statusString, price: req.body.price, saleType: req.body.saleType, coreExchange: req.body.coreExchange, unitComments: req.body.unitComments, jobId: req.params.jobId })
 
             await Job.findByIdAndUpdate(req.params.jobId, { $push: {units: unit._id }}).exec()
             console.log('Unit added to job')
@@ -79,32 +94,13 @@ module.exports = {
             console.log(err)
         }
     },
-    // favoritePriceList: async (req, res)=>{
-    //     try {
-    //         if (req.query.favorited === 'true') {
-    //             await Job.findByIdAndUpdate(req.params.listId, {'favorite' : false})   
-    //             console.log('List removed from favorites')
-    //             // res.json('List removed from favorites')
-    //             res.redirect('/priceLists')
-
-    //         } else {
-    //             await Job.findByIdAndUpdate(req.params.listId, {'favorite' : true})   
-    //             console.log('List added to favorites')
-    //             // res.json('List added to favorites')
-    //             res.redirect('/priceLists')
-    //         }
-            
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // },
-    // editPriceListItem: async (req, res)=>{
+    // editJob: async (req, res)=>{
     //     try {
     //         let key = req.body.column;
     //         let obj = {[key]: req.body.cellContent}
-    //         await Unit.findByIdAndUpdate(req.params.itemId, obj)   
-    //         console.log('Price List Item Updated')
-    //         res.json('Price list item updated')
+    //         await Job.findByIdAndUpdate(req.params.jobId, obj)   
+    //         console.log('Job Updated')
+    //         res.json('Job updated')
     //     } catch (err) {
     //         console.log(err)
     //     }
@@ -120,8 +116,13 @@ module.exports = {
     },
     deleteJobUnit: async (req, res)=>{
         try{
+            console.log(req.params.unitId)
             await Unit.findByIdAndRemove(req.params.unitId)
-            await Job.findByIdAndUpdate(req.params.jobId, )
+            // let response = await Job.findByIdAndUpdate(req.params.jobId, { "units.0": req.params.unitId }).exec()
+            const job = await Job.findById(req.params.jobId)
+            job.units.pull({ _id: req.params.unitId})
+            await job.save()    
+            // let response = await Job.findByIdAndUpdate(req.params.jobId, { $pull:  "units.0" })
             console.log('Deleted Unit from Job')
             res.redirect(`/jobs/${req.params.jobId}`)
         }catch(err){
