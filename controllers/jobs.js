@@ -21,14 +21,14 @@ module.exports = {
                 return unitsArray
             })
             const unitsArrays = await Promise.all(unitsPromises)
-            console.log(unitsArrays)
+            // console.log(unitsArrays)
             res.render('jobs.ejs',  { user: req.user, pageName: 'Jobs', url: 'jobs', jobs: jobs, companyNames: companyNames, units: unitsArrays})
         }catch(err){
             console.log(err)
         }
     },
     getSingleJob: async (req,res)=>{
-        console.log('getSingleJob')
+        // console.log('getSingleJob')
         try{
             const job = await Job.findById(req.params.jobId)
             const units = await Unit.find({jobId: job._id}).sort({'manufacturer': 1, 'modelNumber': 1})
@@ -39,7 +39,7 @@ module.exports = {
         }
     },
     getJobCreator: async (req, res)=>{
-        console.log('jobCreator')
+        // console.log('jobCreator')
         const customerList = await Customer.find()
 
         try{
@@ -50,7 +50,7 @@ module.exports = {
     },
     createJob: async (req, res)=>{
         try{
-            console.log(req.body)
+            // console.log(req.body)
             const unitIdArray = []
             
             let job = await Job.create({inDate: req.body.inDate, customer: req.body.company, poNumber: req.body.poNumber, refNumber: req.body.refNumber, quantity: req.body.quantity, units: unitIdArray, shippedVia: req.body.shippedVia, shippingWeight: req.body.shippingWeight, invoiced: req.body.invoiced, comments: req.body.jobComments })
@@ -84,7 +84,7 @@ module.exports = {
     },
     createJobUnit: async (req, res)=>{
         try{
-            console.log(req.body)
+            // console.log(req.body)
             let unit = await Unit.create({ manufacturer: req.body.manufacturer, modelNumber: req.body.modelNumber, serialNumber: req.body.serialNumber, statusValue: req.body.statusValue, statusString: req.body.statusString, price: req.body.price, saleType: req.body.saleType, coreExchange: req.body.coreExchange, unitComments: req.body.unitComments, jobId: req.params.jobId })
 
             await Job.findByIdAndUpdate(req.params.jobId, { $push: {units: unit._id }}).exec()
@@ -107,7 +107,9 @@ module.exports = {
     // },
     deleteJob: async (req, res)=>{
         try{
-            await Job.findByIdAndRemove(req.params.jobId)
+            const job = await Job.findByIdAndRemove(req.params.jobId)
+            console.log('job: ', job)
+            job.units.forEach(async unit => await Unit.findByIdAndRemove(unit))
             console.log('Deleted Job')
             res.redirect('/jobs')
         }catch(err){

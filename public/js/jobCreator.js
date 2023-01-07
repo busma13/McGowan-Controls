@@ -12,15 +12,18 @@ const unitsFormInput = document.querySelector('#units')
 const quantityFormInput = document.querySelector('#quantity')
 const validationMessage = document.querySelector('#validationMessage')
 const incomingDateInput = document.querySelector('#incomingDate')
+const container = document.querySelector('.container')
 
 localStorage.setItem('unitsList', JSON.stringify([]))
 
 addCustomerBtn.addEventListener('click', ()=> {
     addCustomerModal.classList.add('modal-open')
+    container.classList.add('blur-sm')
 })
 
 addUnitBtn.addEventListener('click', ()=> {
     addUnitModal.classList.add('modal-open')
+    container.classList.add('blur-sm')
 })
 
 cancelAddCustomerBtn.addEventListener('click', ()=> {
@@ -47,10 +50,12 @@ function clearAddUnitModal() {
 
 function closeAddCustomerModal() {
     addCustomerModal.classList.remove('modal-open')
+    container.classList.remove('blur-sm')
 }
 
 function closeAddUnitModal() {
     addUnitModal.classList.remove('modal-open')
+    container.classList.remove('blur-sm')
 }
 
 function updateFormHiddenCustomerField(e) {
@@ -116,6 +121,7 @@ function addCreatedUnitToUnitsList(unitObj) {
     }
     const row = document.createElement('tr')
     const trashcanTd = document.createElement('td')
+    trashcanTd.classList.add('px-2', 'py-2')
     trashcanTd.innerHTML = '<button class="btn modal-button delete-unit-button fa fa-trash mx-2"></button>'
     const trashBtn = trashcanTd.children[0]
     trashBtn.addEventListener('click', deleteJobUnit) 
@@ -123,6 +129,7 @@ function addCreatedUnitToUnitsList(unitObj) {
     for (const key in unitObj) {
         if (key === 'statusValue') continue
         const td = document.createElement('td')
+        td.classList.add('px-2', 'py-2')
         td.textContent = unitObj[key]
         row.appendChild(td)
     }
