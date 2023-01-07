@@ -13,8 +13,8 @@ const CustomerSchema = new mongoose.Schema({
         type: String,
         required:true,
     },
-    contacts: {
-        type: Array,
+    contact: {
+        type: String,
     },
     tel: {
         type: String,

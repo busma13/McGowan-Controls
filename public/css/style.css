@@ -23,3 +23,7 @@ td > div {
 .job-creator-modal-action {
     flex-direction: column;
 }
+
+.btn {
+    @apply rounded-full;
+}

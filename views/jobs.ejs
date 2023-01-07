@@ -1,65 +1,65 @@
 <%- include('partials/header') -%>
 <div class="container mx-auto">
-  <div class="flex justify-center sm:justify-end mt-5 mx-2">
+  <div class="flex flex-col sm:flex-row justify-around items-center mt-5 mx-2 ">
+    <a href="/jobs/createJob"><button class="btn btn-primary m-3">Add New Job</button></a>
     <div>
-      <p><strong>Employee Name</strong>: <%= user.userName %></p>
-      <p><strong>Email</strong>: <%= user.email %></p>
+      <p class="text-sm"><strong>Employee Name</strong>: <%= user.userName %></p>
+      <p class="text-sm"><strong>Email</strong>: <%= user.email %></p>
     </div>
   </div>
-
-  <div class="mt-12 mb-10 mx-5 lg:mx-24">
-    <a href="/jobs/createJob">Add New Job</a>
-    <ul>
-      <% jobs.forEach( (el, i) => { %>
-        <li class='priceList flex justify-between items-center border-2 border-secondary mb-4 py-2  ' data-id='<%= el._id %>'>
-          <div class="flex items-center">
-            <!-- <form action="/priceLists/favoritePriceList/<%= el._id %>?_method=PUT&favorited=<%= el.favorite %>" method="POST" class="col-3">
-              <% if (el.favorite) { %>
-                <button class="text-warning my-2 mx-2 fa fa-star" type="submit"></button>
-              <% } else { %>
-                <button class="my-2 mx-2 fa fa-star" type="submit"></button>
-              <% } %>
-            </form> -->
-            <a href="/jobs/<%= el._id %>"><span class='priceListName text-2xl break-all'><%= el.jobNumber %></span></a>
-          </div>
-          
-          <button class="btn modal-button list-modal-button fa fa-trash mx-2" data-id='<%= el._id %>'></button>
-        </li>
-      <% }) %>    
-    </ul>
+  <hr class="m-10">
+  <div class="mt-12 mb-10 mx-5 lg:mx-24 overflow-auto max-h-screen">
+    <table class="table-auto w-full">
+      <thead>
+        <tr>
+          <td class="px-4 py-2"></td>
+          <td class="px-4 py-2">AS OF</td>
+          <td class="px-4 py-2">JOB#</td>
+          <td class="px-4 py-2">CUSTOMER</td>
+          <td class="px-4 py-2">QTY</td>
+          <td class="px-4 py-2">MFG</td>
+          <td class="px-4 py-2">MODEL</td>
+          <td class="px-4 py-2">PO#</td>
+          <td class="px-4 py-2">REF#</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% jobs.forEach( (el, i) => { %>
+          <tr class="priceList border-2 border-secondary mb-4 py-2 hover:bg-gray-800" data-id='<%= el._id %>' onclick="document.location='/jobs/<%= el._id %>'">
+            <td><button class="btn btn-primary modal-button job-modal-button fa fa-trash m-2" data-id='<%= el._id %>'></button></td>
+            <td class="px-4 py-2"><%= el.inDate.toLocaleDateString() %></td>
+            <td class="px-4 py-2"><%= el.jobNumber %></td>
+            <td class="px-4 py-2"><%= companyNames[i].companyName %></td>
+            <td class="px-4 py-2"><%= el.units.length %></td>
+            <% const mfgList = [...new Set(units[i].map(obj => obj.manufacturer))]
+            const mfgString = mfgList.join(', ') %>
+            <td class="px-4 py-2"><%= mfgString %></td>
+            <% const modelList = [...new Set(units[i].map(obj => obj.modelNumber))]
+            const modelString = modelList.join(', ') %>
+            <td class="px-4 py-2"><%= modelString %></td>
+            <td class="px-4 py-2"><%= el.poNumber %></td>
+            <td class="px-4 py-2"><%= el.refNumber %></td>
+          </tr>
+        <% }) %>
+      </tbody>    
+    </table>
   </div>
-  <!-- <hr class="mb-10">
-  <div class="flex flex-wrap items-center justify-center mb-10">
-    <div class="card card-bordered border-white w-96 glass">
-      <div class="card-body items-center">
-        <h2 class="card-title">Add a Price List</h2>
-        <div class="card-actions justify-end">
-          <form action="/priceLists/createPriceList" method="POST" class="flex flex-col items-center">
-            <label class="input-group input-group-vertical mb-2">
-              <span>List Name:</span>
-              <input type="text"  id="newListName" name="newListName" placeholder="Price List" class="input input-bordered">
-            </label>
-            <button type="submit" class="btn btn-primary mt-3">Create List</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div> -->
+  
 </div>
 
-<!-- Modal to confirm list deletion-->
-<!-- <input type="checkbox" id="delete-list-modal" class="modal-toggle" />
+<!-- Modal to confirm job deletion-->
+<input type="checkbox" id="delete-job-modal" class="modal-toggle" />
 <div class="modal modal-bottom sm:modal-middle">
   <div class="modal-box">
-    <h3 class="font-bold text-lg">Delete Item</h3>
-    <p class="py-4">Are you sure you want to delete this list?</p>
+    <h3 class="font-bold text-lg">Delete Job</h3>
+    <p class="py-4">Are you sure you want to delete this job?</p>
     <div class="modal-action">
-      <button class="btn cancel-delete-list">Cancel</button>
-      <form action="/priceLists/deletePriceList/" method="POST" class="col-3">
-        <button type="submit" class="btn btn-rounded btn-danger btn-modal" id="btn-delete-item" data-id="0">Delete</button>
+      <button class="btn cancel-delete-job">Cancel</button>
+      <form action="/jobs/deleteJob/" method="POST" class="col-3">
+        <button type="submit" class="btn btn-rounded btn-danger btn-modal" id="btn-delete-job" data-id="0">Delete</button>
       </form>
     </div>
   </div>
 </div>
-<script src="../js/deleteListModal.js"></script> -->
+<script src="../js/deleteJobModal.js"></script>
 <%- include('partials/footer') -%>

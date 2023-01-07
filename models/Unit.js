@@ -29,7 +29,8 @@ const UnitSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    comments: String,
+    shipped: Date,
+    unitComments: String,
     jobId: {
         type: String,
         required: true,

@@ -2,6 +2,13 @@ const addUnitBtn = document.querySelector('#addUnit')
 const cancelAddUnitBtn = document.querySelector('.cancel-add-unit')
 const clearAddUnitBtn = document.querySelector('.clear-add-unit')
 const addUnitModal = document.querySelector('#add-unit-modal')
+const deleteUnitModal = document.querySelector('#delete-unit-modal')
+const cancelDeleteUnitBtn = document.querySelector('.cancel-delete-unit')
+const statusSelect = document.querySelector('#statusValue')
+const statusStringInput = document.querySelector('#statusString')
+const trashBtns = document.querySelectorAll('.delete-unit-button')
+const unitsTableRows = document.querySelector('#units-table-body').children
+const jobId = document.querySelector('#units-table-body').dataset.jobId;
 
 addUnitBtn.addEventListener('click', ()=> {
     addUnitModal.classList.add('modal-open')
@@ -11,7 +18,27 @@ cancelAddUnitBtn.addEventListener('click', ()=> {
     closeAddUnitModal()
 })
 
+cancelDeleteUnitBtn.addEventListener('click', ()=> {
+    deleteUnitModal.querySelector('form').action = `/jobs/deleteJobUnit/${jobId}`
+    deleteUnitModal.classList.remove('modal-open')
+})
+
 clearAddUnitBtn.addEventListener('click', clearAddUnitModal)
+
+statusSelect.addEventListener('change', updateFormHiddenStatusStringField)
+
+trashBtns.forEach( btn => {
+  btn.addEventListener('click', passIdToDeleteUnitModal)  
+})
+
+function addUnitIdsToLocalStorage() {
+    const unitIdArray = []
+    for (const row of unitsTableRows) {
+        unitIdArray.push(row.id)
+    }
+    console.log(unitIdArray)
+    localStorage.setItem('unitIdArray', JSON.stringify(unitIdArray))
+}
 
 function clearAddUnitModal() {
     addUnitModal.querySelectorAll('input').forEach((el)=>el.value = '')
@@ -22,62 +49,19 @@ function closeAddUnitModal() {
     addUnitModal.classList.remove('modal-open')
 }
 
-
-document.forms["createJobUnitForm"].onsubmit = ()=>{
-    const unitObj = createJobUnitObject()
-    addCreatedUnitToDatabase(unitObj)
-    addCreatedUnitToUnitsList(unitObj)
-    // updateFormHiddenUnitField()
-    // updateFormHiddenQuantityField(1)
-    closeAddUnitModal()
-    clearAddUnitModal()
-    return false;
+function deleteJobUnit(e) {
+    const row = e.currentTarget.closest('tr')
+    const id = row.id
+    console.log(id)
 }
 
-function createJobUnitObject() {
-    const manufacturer = document.getElementById('manufacturer').value;
-    const modelNumber = document.getElementById('modelNumber').value;
-    const serialNumber = document.getElementById('serialNumber').value;
-    const status = document.getElementById('status')
-    const statusValue = status.value;
-    const statusString = status.options[status.selectedIndex].textContent;
-    const price = document.getElementById('price').value;
-    const saleType = document.getElementById('saleType').value;
-    const coreExchange = document.getElementById('coreExchange').value;
-    const comments = document.getElementById('unitComments').value;
-    const unitObj = { manufacturer, modelNumber, serialNumber, statusValue, statusString, price, saleType, coreExchange, comments }
-    // console.log(unitObj)
-    return unitObj
+function passIdToDeleteUnitModal(event) {
+    const unitId = event.currentTarget.closest('tr').id
+    deleteUnitModal.querySelector('form').action += unitId + '/?_method=DELETE'
+    console.log(deleteUnitModal.querySelector('form').action)
+    deleteUnitModal.classList.add('modal-open')
 }
 
-function addCreatedUnitToDatabase(unitObj) {
-    // Add unit to units db
-    // Add unit to jobs.units
+function updateFormHiddenStatusStringField(e) {
+    statusStringInput.value = e.currentTarget.options[e.currentTarget.selectedIndex].textContent
 }
-
-function addCreatedUnitToUnitsList(unitObj) {
-    const tableBody = document.getElementById('units-table-body')
-    const row = document.createElement('tr')
-    const trashcanTd = document.createElement('td')
-    trashcanTd.innerHTML = '<button class="btn modal-button delete-unit-button fa fa-trash mx-2"></button>'
-    const trashBtn = trashcanTd.children[0]
-    trashBtn.addEventListener('click', deleteJobUnit) 
-    row.appendChild(trashcanTd)
-    for (const key in unitObj) {
-        if (key === 'statusValue') continue
-        const td = document.createElement('td')
-        td.textContent = unitObj[key]
-        row.appendChild(td)
-    }
-    tableBody.appendChild(row)
-}
-
-// function deleteJobUnit(e) {
-//     const row = e.currentTarget.closest('tr')
-//     let unitsList = JSON.parse(localStorage.getItem('unitsList'))
-//     unitsList.splice(row.rowIndex - 2, 1)
-//     localStorage.setItem('unitsList', JSON.stringify(unitsList))
-//     row.remove()
-//     updateFormHiddenUnitField()
-//     updateFormHiddenQuantityField(-1)
-// }

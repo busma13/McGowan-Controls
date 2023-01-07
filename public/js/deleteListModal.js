@@ -5,7 +5,6 @@ const modal = document.querySelector('.modal')
 function passIdToListModal(event) {
     const listId = event.target.dataset.id
     modal.querySelector('form').action += listId + '/?_method=DELETE'
-    console.log(modal.querySelector('form').action)
     modal.classList.add('modal-open')
 }
 
