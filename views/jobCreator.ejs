@@ -1,15 +1,5 @@
 <%- include('partials/header') -%>
-<div class="container mx-auto">
-  <div class="flex justify-center lg:justify-end mb-24 mx-2">
-    <div>
-      <p><strong>Employee Name</strong>: <%= user.userName %></p>
-      <p><strong>Email</strong>: <%= user.email %></p>
-    </div>
-  </div>
-  <div class="mb-10 lg:mx-24">
-    
-  </div>
-  <!-- <hr class="mb-10"> -->
+<div class="container mx-auto mb-10">
   <div class="input-group input-group-vertical mb-2">
     <span>Customer:</span>
     <select name="customer" id="customer" class="input">
@@ -24,8 +14,9 @@
     </select>
     <button id="addCustomer" class="btn my-4">Add Customer</button>
   </div>
-  <div class="input-group input-group-vertical mb-2">
+  <div class="input-group input-group-vertical mb-2 flex flex-col">
     <span>Units:</span>
+    <div class="overflow-auto">
     <table id="units-table">
       <thead>
           <tr>
@@ -42,42 +33,42 @@
           </tr>
       </thead>
       <tbody id="units-table-body">
-        <tr>
-          </tr>
-          </tbody>  
-      </table>
-      <span id="no-units">No units yet</span> 
+        <tr></tr>
+      </tbody>  
+    </table>
+    </div>
+    <span id="no-units" class="self-center">No units yet</span> 
     <button id="addUnit" class="btn my-4">Add Unit</button>
   </div>
   <form action="/jobs/createJob" method="POST" onsubmit="return validateCreateJobForm()" class="flex flex-col items-center">
-    <label class="input-group input-group-vertical mb-2">
+    <label class="mb-2 flex flex-col">
       <span>Incoming Date:</span>
       <input type="date"  id="incomingDate" name="inDate" class="input input-bordered" required/>
     </label>
-    <label class="input-group input-group-vertical mb-2">
+    <label class="mb-2 flex flex-col">
       <span>PO Number:</span>
       <input type="text"  id="poNumber" name="poNumber" placeholder="PO Number" class="input input-bordered"/>
     </label>
-    <label class="input-group input-group-vertical mb-2">
+    <label class="mb-2 flex flex-col">
       <span>Reference Number:</span>
       <input type="text"  id="refNumber" name="refNumber" placeholder="Reference Number" class="input input-bordered"/>
     </label>
-    <label class="input-group input-group-vertical mb-2">
+    <label class="mb-2 flex flex-col">
       <span>Shipped Via:</span>
       <input type="text"  id="shippedVia" name="shippedVia" placeholder="Shipment Type" class="input input-bordered"/>
     </label>
-    <label class="input-group input-group-vertical mb-2">
+    <label class="mb-2 flex flex-col">
       <span>Shipping Weight (lbs):</span>
       <input type="number"  id="shippingWeight" name="shippingWeight" placeholder="Weight" class="input input-bordered"/>
     </label>
-    <label class="input-group input-group-vertical mb-2">
+    <label class="mb-2 flex flex-col">
       <span>Invoiced:</span>
-      <select name="invoiced" id="invoiced" class="input">
+      <select name="invoiced" id="invoiced" class="input input-bordered">
         <option value="No">No</option>
         <option value="Yes">Yes</option>
       </select>
     </label>
-    <label class="input-group input-group-vertical mb-2">
+    <label class="mb-2 flex flex-col lg:w-1/2">
       <span>Comments:</span>
       <textarea id="jobComments" name="jobComments" placeholder="Add comment" class="input input-bordered"></textarea>
     </label>
@@ -96,7 +87,7 @@
   <div class="modal-box">
     <h3 class="font-bold text-lg text-center ">Add Customer</h3>
     <div class="modal-action job-creator-modal-action">
-      <form action="/jobs/createCustomer" method="POST" class="col-3">
+      <form name="createCustomerForm" action="" class="col-3">
         <label class="input-group input-group-vertical mb-2">
           <span>Company Name:</span>
           <input type="text" id="companyName" name="companyName" class="input input-bordered"/>  
@@ -126,7 +117,7 @@
           <textarea name="customerComments" id="customerComments" cols="30" rows="10" class="input input-bordered"></textarea>
         </label>
         <button type="submit" class="btn btn-block" id="btn-add-customer" data-id="0">Add</button>
-        </form>
+      </form>
     </div>
     <div class="flex justify-evenly">
         <button class="btn cancel-add-customer flex-auto my-1 mr-1">Cancel</button>
@@ -134,6 +125,7 @@
       </div>
   </div>
 </div>
+<!-- End Add Customer Modal-->
 
 <!-- Add Unit Modal-->
 <div id="add-unit-modal" class="modal sm:modal-middle">
@@ -197,10 +189,10 @@
         <button type="submit" class="btn btn-block" id="btn-add-unit" data-id="0">Add</button>
       </form>
     </div>
-      <div class="flex justify-evenly">
-        <button class="btn cancel-add-unit flex-auto my-1 mr-1">Cancel</button>
-        <button class="btn clear-add-unit flex-auto my-1 ml-1">Clear</button>
-      </div>
+    <div class="flex justify-evenly">
+      <button class="btn cancel-add-unit flex-auto my-1 mr-1">Cancel</button>
+      <button class="btn clear-add-unit flex-auto my-1 ml-1">Clear</button>
+    </div>
   </div>
 </div>
 <!-- End Add Unit Modal-->

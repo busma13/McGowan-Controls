@@ -9,9 +9,11 @@ const statusStringInput = document.querySelector('#statusString')
 const trashBtns = document.querySelectorAll('.delete-unit-button')
 const unitsTableRows = document.querySelector('#units-table-body').children
 const jobId = document.querySelector('#units-table-body').dataset.jobId;
+const container = document.querySelector('.container')
 
 addUnitBtn.addEventListener('click', ()=> {
     addUnitModal.classList.add('modal-open')
+    container.classList.add('blur-sm')
 })
 
 cancelAddUnitBtn.addEventListener('click', ()=> {
@@ -21,6 +23,7 @@ cancelAddUnitBtn.addEventListener('click', ()=> {
 cancelDeleteUnitBtn.addEventListener('click', ()=> {
     deleteUnitModal.querySelector('form').action = `/jobs/deleteJobUnit/${jobId}`
     deleteUnitModal.classList.remove('modal-open')
+    container.classList.remove('blur-sm')
 })
 
 clearAddUnitBtn.addEventListener('click', clearAddUnitModal)
@@ -47,6 +50,7 @@ function clearAddUnitModal() {
 
 function closeAddUnitModal() {
     addUnitModal.classList.remove('modal-open')
+    container.classList.remove('blur-sm')
 }
 
 function deleteJobUnit(e) {
@@ -60,6 +64,7 @@ function passIdToDeleteUnitModal(event) {
     deleteUnitModal.querySelector('form').action += unitId + '/?_method=DELETE'
     console.log(deleteUnitModal.querySelector('form').action)
     deleteUnitModal.classList.add('modal-open')
+    container.classList.add('blur-sm')
 }
 
 function updateFormHiddenStatusStringField(e) {
