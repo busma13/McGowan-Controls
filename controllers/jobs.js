@@ -75,9 +75,10 @@ module.exports = {
     createCustomer: async (req, res)=>{
         try{
             // console.log(req.body)
-            await Customer.create({companyName: req.body.companyName, shippingAddress: req.body.shippingAddress, billingAddress: req.body.billingAddress, contact: req.body.contact, tel: req.body.tel, fax: req.body.fax, comments: req.body.customerComments })
+            const customer = await Customer.create({companyName: req.body.companyName, shippingAddress: req.body.shippingAddress, billingAddress: req.body.billingAddress, contact: req.body.contact, tel: req.body.tel, fax: req.body.fax, comments: req.body.customerComments })
             console.log('New customer added')
-            res.redirect('/jobs/createJob')
+            console.log(customer)
+            res.json(customer)
         }catch(err){
             console.log(err)
         }

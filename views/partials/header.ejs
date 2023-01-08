@@ -31,11 +31,11 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </label>
             <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a class="" href="/portal">Portal</a></li>
-            <li><a class="" href="/priceLists">Price Lists</a></li>
-            <!-- <li><a class="" href="/docs">Documentation</a></li> -->
               <li><a class="" href="/jobs">Jobs</a></li>
+              <li><a class="" href="/priceLists">Price Lists</a></li>
               <li><a class="" href="/productId">Product Identifier</a></li>
+              <!-- <li><a class="" href="/docs">Documentation</a></li> -->
+              <li><a class="" href="/portal">Portal</a></li>
               <!-- <li><a class="" href="/clock">Time Clock</a></li> -->
               <!-- <li><a class="" href="/sizer">O-Ring Sizer</a></li> -->
             </ul>
@@ -56,6 +56,9 @@
         <div class="navbar-end">
           <a href="/logout" class="btn px-2">Log Out</a>
         </div>
+      </div>
+      <div class="text-end">
+        <p class="m-2"><strong>Logged in as: </strong><%= user.userName %></p>
       </div>
       <div class="text-center">
         <h1 class="my-10"><a class="text-4xl sm:text-6xl" href="/<%= url %>"><%= pageName %></a></h1>

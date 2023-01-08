@@ -1,28 +1,52 @@
 <%- include('partials/header') -%>
 <div class="container mx-auto">
-  <div class="flex justify-center lg:justify-end mb-24 mx-2">
+  <!-- <div class="flex justify-center lg:justify-end mb-24 mx-2">
     <div>
       <p><strong>Employee Name</strong>: <%= user.userName %></p>
       <p><strong>Email</strong>: <%= user.email %></p>
     </div>
-  </div>
-  <div>
-    <span>AS OF: <%= jobObject.inDate.toLocaleDateString() %></span>
-    <span>SHIP TO: <%= customerObject.companyName %></span>
-    <span>ADDRESS: <%= customerObject.shippingAddress %></span>
-    <span>ATTN: <%= customerObject.contact %></span>
-    <span>TELE #: <%= customerObject.tel %></span>
-    <span>FAX #: <%= customerObject.fax %></span>
-    <span>BILL TO: <%= customerObject.companyName %></span>
-    <span>ADDRESS: <%= customerObject.billingAddress %></span>
-
-    <span>CUSTOMER PO #: <%= jobObject.poNumber %></span>
-    <span>CUSTOMER REF #: <%= jobObject.refNumber %></span>
-    <span>SHIP VIA: <%= jobObject.shippedVia %></span>
-    <span>WEIGHT: <%= jobObject.shippingWeight %></span>
-    <span>INVOICED: <%= jobObject.invoiced %></span>
-    <span>COMMENTS: <%= jobObject.comments %></span>
-
+  </div> -->
+  <div class="flex flex-row justify-between mb-10 lg:mx-24">
+    <div class="flex flex-row">
+      <div class="flex flex-col mr-2">
+        <span>SHIP TO: </span>
+        <span>ADDRESS: </span>
+        <span>ATTN: </span>
+        <span>TELE #: </span>
+        <span>FAX #: </span>
+        <span>BILL TO: </span>
+        <span>ADDRESS: </span>
+      </div>
+      <div class="flex flex-col">
+        <span><%= customerObject.companyName %>&nbsp;</span>
+        <span><%= customerObject.shippingAddress %>&nbsp;</span>
+        <span><%= customerObject.contact %>&nbsp;</span>
+        <span><%= customerObject.tel %>&nbsp;</span>
+        <span><%= customerObject.fax %>&nbsp;</span>
+        <span><%= customerObject.companyName %>&nbsp;</span>
+        <span><%= customerObject.billingAddress %>&nbsp;</span>
+      </div>
+    </div>
+    <div class="flex flex-row">
+      <div class="flex flex-col mr-2">
+        <span>AS OF: </span>
+        <span>CUSTOMER PO #: </span>
+        <span>CUSTOMER REF #: </span>
+        <span>SHIP VIA: </span>
+        <span>WEIGHT: </span>
+        <span>INVOICED: </span>
+        <span>COMMENTS: </span>
+      </div>
+      <div class="flex flex-col">
+        <span><%= jobObject.inDate.toLocaleDateString()%>&nbsp;</span>
+        <span><%= jobObject.poNumber %>&nbsp;</span>
+        <span><%= jobObject.refNumber %>&nbsp;</span>
+        <span><%= jobObject.shippedVia %>&nbsp;</span>
+        <span><%- jobObject.shippingWeight %>&nbsp;</span>
+        <span><%= jobObject.invoiced %>&nbsp;</span>
+        <span><%= jobObject.comments %>&nbsp;</span>
+      </div>    
+    </div>
   </div>
   <div class="mb-10 lg:mx-24">
     <div class="input-group input-group-vertical mb-2">
@@ -30,6 +54,7 @@
       <table id="units-table">
         <thead>
             <tr>
+              <th></th>
               <th></th>
               <th>Manufacturer</th>
               <th>Model Number</th>
@@ -44,6 +69,7 @@
         <tbody id="units-table-body" data-jobId="<%=jobObject._id%>">
           <% units.forEach( (el, i) => {%>
             <tr id="<%= el.id %>">
+              <td><%= i + 1 %></td>
               <td class="align-top text-center p-3">
                 <button
                   class="btn modal-button delete-unit-button fa fa-trash"
@@ -75,11 +101,11 @@
                   <%= el.shipped?.toLocaleDateString() %>
               </td>
             </tr>
-            <tr><td>Comments: </td><td><%= el.unitComments %></td></tr>
+            <tr><td></td><td></td><td>Comments: </td><td><%= el.unitComments %></td></tr>
           <% }) %>
         </tbody>  
       </table>
-      <button id="addUnit">Add Unit</button>
+      <button id="addUnit" class="btn">Add Unit</button>
     </div>
   </div>
 </div>
@@ -141,10 +167,12 @@
           <span>Comments:</span>
           <textarea name="unitComments" id="unitComments" cols="30" rows="10" class="input input-bordered"></textarea>
         </label>
-        <button type="submit" class="btn btn-rounded btn-danger btn-modal" id="btn-add-unit" data-id="0">Add</button>
+        <button type="submit" class="btn btn-block" id="btn-add-unit" data-id="0">Add</button>
       </form>
-      <button class="btn cancel-add-unit">Cancel</button>
-      <button class="btn clear-add-unit">Clear</button>
+    </div>
+    <div class="flex justify-evenly">
+      <button class="btn cancel-add-unit flex-auto my-1 mr-1">Cancel</button>
+      <button class="btn clear-add-unit flex-auto my-1 ml-1">Clear</button>
     </div>
   </div>
 </div>
