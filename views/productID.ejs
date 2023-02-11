@@ -8,7 +8,7 @@
   </div> -->
   <div class="mt-12 mx-5 lg:mx-24 menu">
     <div class="mb-4">
-      <span>Manufacturer: </span>
+      <span class="mr-4">Manufacturer: </span>
       <input type="radio" name="manufacturer" value="Danfoss" id="danfoss"/> 
       <label for="danfoss" class="mr-2">Danfoss</label> 
       <!-- <input type="radio" name="manufacturer" value="Moog" id="moog"/>
@@ -17,7 +17,7 @@
 
     <div id="containerDanfoss" class="manufacturerDiv mb-4" hidden>
       <div class="mb-4">
-        <span>Product:</span>
+        <span class="mb-1">Product:</span>
         <select name="danfossProductType" id="danfossProductType" class="productTypeSelect input input-bordered">
           <option value="" selected disabled>Choose A Product Type</option>
           <option value="PCP">Pressure Control Pilot</option>
@@ -28,7 +28,7 @@
       </div>
       <div id="containerPCP" class="productTypeDiv" hidden>
         <div class="mb-4">
-          <span>Model:</span>
+          <span class="mb-1">Model:</span>
           <select name="modelPrefixPCP" id="modelTypePCP" class="input input-bordered">
             <option value="" selected disabled>Choose a model</option>
             <option value="110">MCV110</option>
@@ -39,8 +39,8 @@
           <hr class="mb-4">
           <div class="flex justify-evenly">
             <div class="flex flex-col justify-between">
-              <div>
-                <span>Connector:</span>
+              <div class="mb-4">
+                <span class="mb-1">Connector:</span>
                 <select name="connectorType" id="connectorType" class="input input-bordered">
                   <option value="all" selected>All</option>
                   <option value="0">None</option>
@@ -67,7 +67,7 @@
               <img src="/images/MCV116_Config.png" alt="MCV116 Configuration Chart" class="mb-4">
               <p class="mb-4">Enter all fields that you have data for:</p>
               <div class="mb-4">
-                <span>Configuration:</span>
+                <span class="mb-1">Configuration:</span>
                 <select name="revType" id="revType" class="input input-bordered">
                   <option value="all" selected>All</option>
                   <option value="A">A</option>
@@ -83,7 +83,7 @@
                 </select>
               </div>
               <div class="mb-4">
-                <span>Type:</span>
+                <span class="mb-1">Type:</span>
                 <select name="typeNumber" id="typeNumber" class="input input-bordered">
                   <option value="all" selected>All</option>
                   <option value="1">1</option>
@@ -93,7 +93,7 @@
                 </select>
               </div>
               <div class="mb-4">
-                <span>Coil:</span>
+                <span class="mb-1">Coil:</span>
                 <select name="coilType" id="coilType" class="input input-bordered">
                   <option value="all" selected>All</option>
                   <option value="1">23 ohm</option>
@@ -105,7 +105,7 @@
                 </select>
               </div>
               <div class="mb-4">
-                <span>Connector:</span>
+                <span class="mb-1">Connector:</span>
                 <select name="connectorType" id="connectorType" class="input input-bordered">
                   <option value="all" selected>All</option>
                   <option value="0">00 - None</option>
@@ -128,7 +128,7 @@
                 </select>
               </div>
               <div class="mb-4">
-                <span>Where Used:</span>
+                <span class="mb-1">Where Used:</span>
                 <select name="modelType" id="modelType" class="input input-bordered">
                   <option value="all" selected>All</option>
                   <option value="IS">Intrinsically Safe</option>
@@ -154,7 +154,7 @@
       </div>
       <div id="containerEDC" class="productTypeDiv mb-4" hidden>
         <div class="mb-4">
-          <span>Pump Series:</span>
+          <span class="mb-1">Pump Series:</span>
           <select name="modelType" id="modelType" class="input input-bordered">
             <option value="20">Series 20</option>
             <option value="42">Series 42</option>
@@ -165,7 +165,7 @@
       </div>
       <div id="containerServo" class="productTypeDiv mb-4" hidden>
         <div class="mb-4">
-          <span>Supply:</span>
+          <span class="mb-1">Supply:</span>
           <select name="servoSupply" id="servoSupply" class="input input-bordered">
             <option value="A">500 to 3000 psi</option>
             <option value="C">200 to 1000 psi</option>
@@ -179,7 +179,7 @@ and with pilot drain</option>
       </div>
       <div id="containerMCH" class="productTypeDiv mb-4" hidden>
         <div class="mb-4">
-          <span>Mounting:</span>
+          <span class="mb-1">Mounting:</span>
           <select name="modelType" id="modelType" class="input input-bordered">
             <option value="1">Base (surface) mount aluminum case</option>
             <option value="2">Top mount (drop-in) with plastic case</option>
@@ -191,7 +191,7 @@ and with pilot drain</option>
       </div>
     </div>
     <div id="containerMoog" class="manufacturerDiv mb-4" hidden>
-      <span>Product Type:</span>
+      <span class="mb-1">Product Type:</span>
       <select name="moogProductType" id="moogProductType" class="productTypeSelect input input-bordered">
         <option value="pumpControl">Pump Control</option>
         <option value="servo">Servo</option>

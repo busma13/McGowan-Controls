@@ -7,8 +7,6 @@ const pilotDivs = document.querySelectorAll('.pilotDiv')
 const resultProductsList = document.querySelector('#resultProductsList')
 
 let currentPath = []
-// console.log(productTypeSelects)
-
 
 manufacturers.forEach(manufacturer => {
     manufacturer.addEventListener('click', showManufacturer)

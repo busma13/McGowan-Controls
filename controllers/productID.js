@@ -12,7 +12,6 @@ module.exports = {
     getProductIDPilot: async (req,res)=>{
         console.log(req.user)
         try{
-            // const listItems = await PriceList.find().sort({favorite: "desc"}).collation({locale:'en',strength: 2}).sort({listName: 1})
             let selectValues = req.query.selectValues.split(',')
             let prefix = req.query.modelPrefixPCP
             console.log('selectValues: ', selectValues)
