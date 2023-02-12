@@ -27,9 +27,3 @@ td > div {
 .btn {
     @apply rounded-full;
 }
-
-@media screen and (max-width: 450px) {
-    .single-job-details {
-        flex-direction: column;
-    }
-}

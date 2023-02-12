@@ -2,10 +2,6 @@
 <div class="container mx-auto">
   <div class="flex flex-col sm:flex-row justify-around items-center mt-5 mx-2 ">
     <a href="/jobs/createJob"><button class="btn btn-primary m-3">Add New Job</button></a>
-    <!-- <div>
-      <p class="text-sm"><strong>Employee Name</strong>: <%= user.userName %></p>
-      <p class="text-sm"><strong>Email</strong>: <%= user.email %></p>
-    </div> -->
   </div>
   <hr class="m-10">
   <div class="mt-12 mb-10 mx-5 lg:mx-24 overflow-auto max-h-screen">
@@ -25,7 +21,7 @@
       </thead>
       <tbody>
         <% jobs.forEach( (el, i) => { %>
-          <tr class="priceList border-2 border-secondary mb-4 py-2 hover:bg-gray-800" data-id='<%= el._id %>' onclick="document.location='/jobs/<%= el._id %>'">
+          <tr class="priceList border-2 border-secondary hover:bg-gray-800" data-id='<%= el._id %>' onclick="document.location='/jobs/<%= el._id %>'">
             <td><button class="btn btn-primary modal-button job-modal-button fa fa-trash m-2" data-id='<%= el._id %>'></button></td>
             <td class="px-4 py-2"><%= el.inDate.toLocaleDateString() %></td>
             <td class="px-4 py-2"><%= el.jobNumber %></td>
