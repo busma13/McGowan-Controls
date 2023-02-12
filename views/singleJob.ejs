@@ -1,51 +1,65 @@
 <%- include('partials/header') -%>
-<div class="container mx-auto">
-  <!-- <div class="flex justify-center lg:justify-end mb-24 mx-2">
-    <div>
-      <p><strong>Employee Name</strong>: <%= user.userName %></p>
-      <p><strong>Email</strong>: <%= user.email %></p>
+<div class="container mx-auto flex flex-col items-center sm:items-stretch">
+  <div class="inline-grid sm:flex flex-col sm:flex-row items-center justify-evenly mb-10 lg:mx-24">
+    <div class="flex flex-col">
+      <div class="flex flex-row justify-start mr-2">
+        <span class="min-w-[85px]">SHIP TO: </span>
+        <p class="mb-2 ml-2"><%= customerObject.companyName %>&nbsp;</p>
+      </div>
+      <div class="flex flex-row justify-start mr-2">
+        <span class="min-w-[85px]">ADDRESS: </span>
+        <p class="mb-2 ml-2"><%= customerObject.shippingAddress %>&nbsp;</p>
+      </div>
+      <div class="flex flex-row justify-start mr-2">
+        <span class="min-w-[85px]">ATTN: </span>
+        <p class="mb-2 ml-2"><%= customerObject.contact %>&nbsp;</p>
+      </div>
+      <div class="flex flex-row justify-start mr-2">
+        <span class="min-w-[85px]">TELE #: </span>
+        <p class="mb-2 ml-2"><%= customerObject.tel %>&nbsp;</p>
+      </div>
+      <div class="flex flex-row justify-start mr-2">
+        <span class="min-w-[85px]">FAX #: </span>
+        <p class="mb-2 ml-2"><%= customerObject.fax %>&nbsp;</p>
+      </div>
+      <div class="flex flex-row justify-start mr-2">
+        <span class="min-w-[85px]">BILL TO: </span>
+        <p class="mb-2 ml-2"><%= customerObject.companyName %>&nbsp;</p>
+      </div>
+      <div class="flex flex-row justify-start mr-2">
+        <span class="min-w-[85px]">ADDRESS: </span>
+        <p class="mb-2 ml-2"><%= customerObject.billingAddress %>&nbsp;</p>
+      </div>
     </div>
-  </div> -->
-  <div class="flex flex-row justify-between mb-10 lg:mx-24">
-    <div class="flex flex-row">
-      <div class="flex flex-col mr-2">
-        <span>SHIP TO: </span>
-        <span>ADDRESS: </span>
-        <span>ATTN: </span>
-        <span>TELE #: </span>
-        <span>FAX #: </span>
-        <span>BILL TO: </span>
-        <span>ADDRESS: </span>
-      </div>
-      <div class="flex flex-col">
-        <span><%= customerObject.companyName %>&nbsp;</span>
-        <span><%= customerObject.shippingAddress %>&nbsp;</span>
-        <span><%= customerObject.contact %>&nbsp;</span>
-        <span><%= customerObject.tel %>&nbsp;</span>
-        <span><%= customerObject.fax %>&nbsp;</span>
-        <span><%= customerObject.companyName %>&nbsp;</span>
-        <span><%= customerObject.billingAddress %>&nbsp;</span>
-      </div>
+    <div class="flex flex-col">
+    <div class="flex flex-row justify-start mr-2">
+      <span class="min-w-[100px]">AS OF: </span>
+      <p class="mb-2 ml-2"><%= jobObject.inDate.toLocaleDateString()%>&nbsp;</p>
+    </div>        
+    <div class="flex flex-row justify-start mr-2">
+      <span class="min-w-[100px]">PO #: </span>
+      <p class="mb-2 ml-2"><%= jobObject.poNumber %>&nbsp;</p>
+    </div>        
+    <div class="flex flex-row justify-start mr-2">
+      <span class="min-w-[100px]">REF #: </span>
+      <p class="mb-2 ml-2"><%= jobObject.refNumber %>&nbsp;</p>
+    </div>        
+    <div class="flex flex-row justify-start mr-2">
+      <span class="min-w-[100px]">SHIP VIA: </span>
+      <p class="mb-2 ml-2"><%= jobObject.shippedVia %>&nbsp;</p>
+    </div>        
+    <div class="flex flex-row justify-start mr-2">
+      <span class="min-w-[100px]">WEIGHT: </span>
+      <p class="mb-2 ml-2"><%- jobObject.shippingWeight %>&nbsp;</p>
+    </div>        
+    <div class="flex flex-row justify-start mr-2">
+      <span class="min-w-[100px]">INVOICED: </span>
+      <p class="mb-2 ml-2"><%= jobObject.invoiced %>&nbsp;</p>
+    </div>        
+    <div class="flex flex-row justify-start mr-2">
+      <span class="min-w-[100px]">COMMENTS: </span>
+      <p class="mb-2 ml-2"><%= jobObject.comments %>&nbsp;</p>
     </div>
-    <div class="flex flex-row">
-      <div class="flex flex-col mr-2">
-        <span>AS OF: </span>
-        <span>CUSTOMER PO #: </span>
-        <span>CUSTOMER REF #: </span>
-        <span>SHIP VIA: </span>
-        <span>WEIGHT: </span>
-        <span>INVOICED: </span>
-        <span>COMMENTS: </span>
-      </div>
-      <div class="flex flex-col">
-        <span><%= jobObject.inDate.toLocaleDateString()%>&nbsp;</span>
-        <span><%= jobObject.poNumber %>&nbsp;</span>
-        <span><%= jobObject.refNumber %>&nbsp;</span>
-        <span><%= jobObject.shippedVia %>&nbsp;</span>
-        <span><%- jobObject.shippingWeight %>&nbsp;</span>
-        <span><%= jobObject.invoiced %>&nbsp;</span>
-        <span><%= jobObject.comments %>&nbsp;</span>
-      </div>    
     </div>
   </div>
   <div class="mb-10 lg:mx-24">
@@ -53,57 +67,62 @@
       <span>Units:</span>
       <table id="units-table">
         <thead>
-            <tr>
-              <th></th>
-              <th></th>
-              <th>Manufacturer</th>
-              <th>Model Number</th>
-              <th>Serial Number</th>
-              <th>Status</th>
-              <th>Price</th>
-              <th>Sale Type</th>
-              <th>Core Exchange</th>
-              <th>Ship Date</th>
-            </tr>
+          <tr>
+            <th></th>
+            <th></th>
+            <th>Manufacturer</th>
+            <th>Model Number</th>
+            <th>Serial Number</th>
+            <th>Status</th>
+            <th>Price</th>
+            <th>Sale Type</th>
+            <th>Core Exchange</th>
+            <th>Ship Date</th>
+          </tr>
         </thead>
         <tbody id="units-table-body" data-jobId="<%=jobObject._id%>">
           <% units.forEach( (el, i) => {%>
-            <tr id="<%= el.id %>">
-              <td><%= i + 1 %></td>
-              <td class="align-top text-center p-3">
-                <button
-                  class="btn modal-button delete-unit-button fa fa-trash"
-                  data-id="< %= el.id  %>"
-                ></button>
-              </td>
-              <td class="manufacturer align-top can-edit p-3">
-                <div><%= el.manufacturer %></div>
-              </td>
-              <td class="modelNumber align-top can-edit text-center p-3">
-                <%= el.modelNumber %>
-              </td>
-              <td class="serialNumber align-top can-edit p-3">
-                <div><%= el.serialNumber %></div>
-              </td>
-              <td class="Status align-top can-edit p-3">
-                <div><%= el.statusString %></div>
-              </td>
-              <td class="Price align-top can-edit p-3">
-                <div>$<%= el.price %></div>
-              </td>
-              <td class="Sale Type align-top can-edit p-3">
-                <div><%= el.saleType %></div>
-              </td>
-              <td class="Exchange align-top can-edit p-3">
-                <div><%= el.coreExchange %></div>
-              </td>
-              <td class="comments align-top can-edit text-center p-3">
-                  <%= el.shipped?.toLocaleDateString() %>
-              </td>
-            </tr>
-            <tr><td></td><td></td><td>Comments: </td><td><%= el.unitComments %></td></tr>
+          <tr id="<%= el.id %>">
+            <td><%= i + 1 %></td>
+            <td class="align-top text-center p-3">
+              <button
+                class="btn modal-button delete-unit-button fa fa-trash"
+                data-id="< %= el.id  %>"
+              ></button>
+            </td>
+            <td class="manufacturer align-top can-edit p-3">
+              <div><%= el.manufacturer %></div>
+            </td>
+            <td class="modelNumber align-top can-edit text-center p-3">
+              <%= el.modelNumber %>
+            </td>
+            <td class="serialNumber align-top can-edit p-3">
+              <div><%= el.serialNumber %></div>
+            </td>
+            <td class="Status align-top can-edit p-3">
+              <div><%= el.statusString %></div>
+            </td>
+            <td class="Price align-top can-edit p-3">
+              <div>$<%= el.price %></div>
+            </td>
+            <td class="Sale Type align-top can-edit p-3">
+              <div><%= el.saleType %></div>
+            </td>
+            <td class="Exchange align-top can-edit p-3">
+              <div><%= el.coreExchange %></div>
+            </td>
+            <td class="comments align-top can-edit text-center p-3">
+              <%= el.shipped?.toLocaleDateString() %>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Comments:</td>
+            <td><%= el.unitComments %></td>
+          </tr>
           <% }) %>
-        </tbody>  
+        </tbody>
       </table>
       <button id="addUnit" class="btn">Add Unit</button>
     </div>
@@ -116,22 +135,44 @@
   <div class="modal-box">
     <h3 class="font-bold text-lg text-center">Add Unit</h3>
     <div class="modal-action job-creator-modal-action">
-      <form name="createJobUnitForm" action="createJobUnit/<%= jobObject._id %>" method="POST" class="col-3">
+      <form
+        name="createJobUnitForm"
+        action="createJobUnit/<%= jobObject._id %>"
+        method="POST"
+        class="col-3"
+      >
         <label class="input-group input-group-vertical mb-2">
           <span>Manufacturer:</span>
-          <input type="text" id="manufacturer" name="manufacturer" class="input input-bordered" required/>
+          <input
+            type="text"
+            id="manufacturer"
+            name="manufacturer"
+            class="input input-bordered"
+            required
+          />
         </label>
         <label class="input-group input-group-vertical mb-2">
           <span>Model Number:</span>
-          <input type="text" id="modelNumber" name="modelNumber" class="input input-bordered" required/>
+          <input
+            type="text"
+            id="modelNumber"
+            name="modelNumber"
+            class="input input-bordered"
+            required
+          />
         </label>
         <label class="input-group input-group-vertical mb-2">
           <span>Serial Number:</span>
-          <input type="text" id="serialNumber" name="serialNumber" class="input input-bordered"/>
+          <input
+            type="text"
+            id="serialNumber"
+            name="serialNumber"
+            class="input input-bordered"
+          />
         </label>
         <label class="input-group input-group-vertical mb-2">
           <span>Status:</span>
-          <select id="statusValue" name="statusValue" class="input"/>
+          <select id="statusValue" name="statusValue" class="input">
             <option value="toBeEvaluated" selected>To Be Evaluated</option>
             <option value="approved">Approved</option>
             <option value="holdForApproval">Hold For Approval</option>
@@ -142,10 +183,20 @@
             <option value="ber">B.E.R.</option>
           </select>
         </label>
-        <input type="hidden"  id="statusString" name="statusString" value="To Be Evaluated">
+        <input
+          type="hidden"
+          id="statusString"
+          name="statusString"
+          value="To Be Evaluated"
+        />
         <label class="input-group input-group-vertical mb-2">
           <span>Price:</span>
-          <input type="number" id="price" name="price" class="input input-bordered"/>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            class="input input-bordered"
+          />
         </label>
         <label class="input-group input-group-vertical mb-2">
           <span>Sale Type:</span>
@@ -165,9 +216,22 @@
         </label>
         <label class="input-group input-group-vertical mb-2">
           <span>Comments:</span>
-          <textarea name="unitComments" id="unitComments" cols="30" rows="10" class="input input-bordered"></textarea>
+          <textarea
+            name="unitComments"
+            id="unitComments"
+            cols="30"
+            rows="10"
+            class="input input-bordered"
+          ></textarea>
         </label>
-        <button type="submit" class="btn btn-block" id="btn-add-unit" data-id="0">Add</button>
+        <button
+          type="submit"
+          class="btn btn-block"
+          id="btn-add-unit"
+          data-id="0"
+        >
+          Add
+        </button>
       </form>
     </div>
     <div class="flex justify-evenly">
@@ -185,8 +249,19 @@
     <p class="py-4">Are you sure you want to delete this unit?</p>
     <div class="modal-action">
       <button class="btn cancel-delete-unit">Cancel</button>
-      <form action="/jobs/deleteJobUnit/<%= jobObject._id %>/" method="POST" class="col-3">
-        <button type="submit" class="btn btn-rounded btn-danger btn-modal" id="btn-delete-unit" data-id="0">Delete</button>
+      <form
+        action="/jobs/deleteJobUnit/<%= jobObject._id %>/"
+        method="POST"
+        class="col-3"
+      >
+        <button
+          type="submit"
+          class="btn btn-rounded btn-danger btn-modal"
+          id="btn-delete-unit"
+          data-id="0"
+        >
+          Delete
+        </button>
       </form>
     </div>
   </div>
