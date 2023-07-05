@@ -8,6 +8,10 @@ on:
     branches: [ "main" ]
   pull_request:
 
+env: 
+  DB_STRING: ${{ secrets.DB_STRING }}
+  SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+        
 jobs:
   build:
 
@@ -34,7 +38,4 @@ jobs:
 #         echo DB_STRING=${{ secrets.DB_STRING }} >> config/.env
 #         echo SESSION_SECRET=${{ secrets.SESSION_SECRET }} >> config/.env
     - name: set env variables
-      env: 
-        DB_STRING: ${{ secrets.DB_STRING }}
-        SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
     - run: npm test
