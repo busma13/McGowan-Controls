@@ -37,5 +37,4 @@ jobs:
 #         ls ./config
 #         echo DB_STRING=${{ secrets.DB_STRING }} >> config/.env
 #         echo SESSION_SECRET=${{ secrets.SESSION_SECRET }} >> config/.env
-    - name: set env variables
     - run: npm test
