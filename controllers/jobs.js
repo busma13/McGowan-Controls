@@ -1,7 +1,7 @@
-const jobsService = require("../services/JobsService")
-const Unit = require("../models/Unit")
-const Customer = require("../models/Customer")
-const JobsService = require("../services/JobsService")
+const jobsService = require('../services/JobsService')
+const Unit = require('../models/Unit')
+const Customer = require('../models/Customer')
+const JobsService = require('../services/JobsService')
 
 module.exports = {
   getJobs: async (req, res) => {
@@ -10,7 +10,7 @@ module.exports = {
       const jobs = await jobsService.getAllJobs()
       const companyNamesPromises = jobs.map(async (job) => {
         const customer = await Customer.findById(job.customer)
-          .select("companyName")
+          .select('companyName')
           .exec()
         return customer
       })
@@ -19,7 +19,7 @@ module.exports = {
       const unitsPromises = jobs.map(async (job) => {
         const unitsArray = await Unit.find(
           { jobId: job._id },
-          "manufacturer modelNumber jobId"
+          'manufacturer modelNumber jobId'
         ).exec()
         // console.log(job.jobNumber)
         // console.log(unitsArray)
@@ -27,10 +27,10 @@ module.exports = {
       })
       const unitsArrays = await Promise.all(unitsPromises)
       // console.log(unitsArrays)
-      res.render("jobs.ejs", {
+      res.render('jobs.ejs', {
         user: req.user,
-        pageName: "Jobs",
-        url: "jobs",
+        pageName: 'Jobs',
+        url: 'jobs',
         jobs: jobs,
         companyNames: companyNames,
         units: unitsArrays,
@@ -48,7 +48,7 @@ module.exports = {
         modelNumber: 1,
       })
       const customer = await Customer.findById(job.customer)
-      res.render("singleJob.ejs", {
+      res.render('singleJob.ejs', {
         user: req.user,
         pageName: `Job # ${job.jobNumber} - ${customer.companyName}`,
         url: `jobs/${req.params.jobId}`,
@@ -65,7 +65,7 @@ module.exports = {
     const customerList = await Customer.find()
 
     try {
-      res.render("jobCreator.ejs", {
+      res.render('jobCreator.ejs', {
         user: req.user,
         pageName: `Job Creator`,
         url: `jobs/jobCreator`,
@@ -79,20 +79,6 @@ module.exports = {
     try {
       // console.log(req.body)
       const unitIdArray = []
-
-      // let job = await Job.create({
-      //   inDate: req.body.inDate,
-      //   customer: req.body.company,
-      //   poNumber: req.body.poNumber,
-      //   refNumber: req.body.refNumber,
-      //   quantity: req.body.quantity,
-      //   units: unitIdArray,
-      //   shippedVia: req.body.shippedVia,
-      //   shippingWeight: req.body.shippingWeight,
-      //   invoiced: req.body.invoiced,
-      //   comments: req.body.jobComments,
-      // })
-
       let job = await JobsService.createJob(req.body)
 
       const unitsArray = JSON.parse(req.body.units)
@@ -112,14 +98,14 @@ module.exports = {
           jobId: job._id,
         })
         // console.log(unit._id)
-        console.log("Unit added to job")
+        console.log('Unit added to job')
         const unitId = unit._id
         unitIdArray.push(unitId)
       }
 
       await JobsService.findJobByIdAndUpdate(job._id, { units: unitIdArray })
-      console.log("New job added")
-      res.redirect("/jobs")
+      console.log('New job added')
+      res.redirect('/jobs')
     } catch (err) {
       console.log(err)
     }
@@ -136,7 +122,7 @@ module.exports = {
         fax: req.body.fax,
         comments: req.body.customerComments,
       })
-      console.log("New customer added")
+      console.log('New customer added')
       console.log(customer)
       res.json(customer)
     } catch (err) {
@@ -162,7 +148,7 @@ module.exports = {
       await JobsService.findJobByIdAndUpdate(req.params.jobId, {
         $push: { units: unit._id },
       })
-      console.log("Unit added to job")
+      console.log('Unit added to job')
       res.redirect(`/jobs/${req.params.jobId}`)
     } catch (err) {
       console.log(err)
@@ -182,10 +168,10 @@ module.exports = {
   deleteJob: async (req, res) => {
     try {
       const job = await JobsService.findJobByIdAndRemove(req.params.jobId)
-      console.log("job: ", job)
+      console.log('job: ', job)
       job.units.forEach(async (unit) => await Unit.findByIdAndRemove(unit))
-      console.log("Deleted Job")
-      res.redirect("/jobs")
+      console.log('Deleted Job')
+      res.redirect('/jobs')
     } catch (err) {
       console.log(err)
     }
@@ -199,7 +185,7 @@ module.exports = {
       job.units.pull({ _id: req.params.unitId })
       await job.save()
       // let response = await Job.findByIdAndUpdate(req.params.jobId, { $pull:  "units.0" })
-      console.log("Deleted Unit from Job")
+      console.log('Deleted Unit from Job')
       res.redirect(`/jobs/${req.params.jobId}`)
     } catch (err) {
       console.log(err)
