@@ -31,6 +31,6 @@ jobs:
     - name: create env file
       run: |
         touch config/.env
-        echo DB_STRING=${{ secrets.DB_STRING }} >> .env
-        echo SESSION_SECRET=${{ secrets.SESSION_SECRET }} >> .env
+        echo DB_STRING=${{ secrets.DB_STRING }} >> config/.env
+        echo SESSION_SECRET=${{ secrets.SESSION_SECRET }} >> config/.env
     - run: npm test
