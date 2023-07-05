@@ -1,9 +1,9 @@
-const Job = require("../models/Job")
+const Job = require('../models/Job')
 
 module.exports = class JobsService {
   static async getAllJobs() {
     try {
-      const allJobs = await Job.find().sort({ _id: "desc" })
+      const allJobs = await Job.find().sort({ _id: 'desc' })
       return allJobs
     } catch (error) {
       console.log(`Could not fetch jobs ${error}`)
@@ -20,6 +20,7 @@ module.exports = class JobsService {
   }
 
   static async createJob(data) {
+    // console.log(data)
     try {
       const newJob = {
         inDate: data.inDate,
@@ -41,7 +42,7 @@ module.exports = class JobsService {
   }
 
   static async findJobByIdAndUpdate(jobId, unitIdObject) {
-    console.log(jobId, unitIdObject)
+    // console.log(jobId, unitIdObject)
     try {
       await Job.findByIdAndUpdate(jobId, unitIdObject).exec()
     } catch (error) {
