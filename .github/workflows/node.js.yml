@@ -30,8 +30,9 @@ jobs:
     - run: npm run build --if-present
     - name: create env file
       run: |
-        touch config/.env
+        sudo touch config/.env
+        ls ./config
         echo DB_STRING=${{ secrets.DB_STRING }} >> config/.env
         echo SESSION_SECRET=${{ secrets.SESSION_SECRET }} >> config/.env
-        ls ./config
+        
     - run: npm test
