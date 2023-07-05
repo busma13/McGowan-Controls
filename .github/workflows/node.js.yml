@@ -33,4 +33,5 @@ jobs:
         touch config/.env
         echo DB_STRING=${{ secrets.DB_STRING }} >> config/.env
         echo SESSION_SECRET=${{ secrets.SESSION_SECRET }} >> config/.env
+        ls ./config
     - run: npm test
