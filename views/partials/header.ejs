@@ -1,67 +1,78 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="business">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>McGowan Controls</title>
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/imgs/favicon-32x32.png"
-    />
-    <link href="/css/output.css" rel="stylesheet">
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-      crossorigin="anonymous"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.46.1/dist/full.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="/css/style.css" />
-  </head>
-  <body>
-    <header>
-      <div class="navbar bg-base-300">
-        <div class="navbar-start">
-          <div class="dropdown">
-            <label tabindex="0" class="btn btn-ghost lg:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-            </label>
-            <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-              <li><a class="" href="/jobs">Jobs</a></li>
-              <li><a class="" href="/priceLists">Price Lists</a></li>
-              <li><a class="" href="/productId">Product Identifier</a></li>
-              <!-- <li><a class="" href="/docs">Documentation</a></li> -->
-              <li><a class="" href="/portal">Portal</a></li>
-              <!-- <li><a class="" href="/clock">Time Clock</a></li> -->
-              <!-- <li><a class="" href="/sizer">O-Ring Sizer</a></li> -->
-            </ul>
-          </div>
-          <a href="/" class="btn px-2 btn-ghost normal-case text-xl flex flex-col flex-nowrap"><p>McGowan</p><p>Controls</p></a>
-        </div>
-        <div class="navbar-center hidden lg:flex">
-          <ul class="menu menu-horizontal p-0">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>McGowan Controls - <%= pageName %>
+  </title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/imgs/favicon-32x32.png" />
+  <link href="/css/output.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@2.46.1/dist/full.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <% try { if (vueScriptSrc !==undefined) {%>
+    <script src="<%= vueScriptSrc %>"></script>
+    <% } %>
+      <% } catch (err) { %>
+
+        <% } %>
+
+</head>
+
+<body>
+  <header>
+    <div class="navbar bg-base-300">
+      <div class="navbar-start">
+        <div class="dropdown">
+          <label tabindex="0" class="btn btn-ghost lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+            </svg>
+          </label>
+          <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
             <li><a class="" href="/jobs">Jobs</a></li>
             <li><a class="" href="/priceLists">Price Lists</a></li>
-            <li><a class="" href="/productId">Product ID</a></li>
-            <!-- <li><a class="" href="/docs">Docs</a></li> -->
+            <li><a class="" href="/productId">Product Identifier</a></li>
+            <!-- <li><a class="" href="/docs">Documentation</a></li> -->
             <li><a class="" href="/portal">Portal</a></li>
             <!-- <li><a class="" href="/clock">Time Clock</a></li> -->
             <!-- <li><a class="" href="/sizer">O-Ring Sizer</a></li> -->
           </ul>
         </div>
-        <div class="navbar-end">
-          <a href="/logout" class="btn px-2">Log Out</a>
-        </div>
+        <a href="/" class="btn px-2 btn-ghost normal-case text-xl flex flex-col flex-nowrap">
+          <p>McGowan</p>
+          <p>Controls</p>
+        </a>
       </div>
-      <div class="text-end">
-        <p class="m-2"><strong>Logged in as: </strong><%= user.userName %></p>
+      <div class="navbar-center hidden lg:flex">
+        <ul class="menu menu-horizontal p-0">
+          <li><a class="" href="/jobs">Jobs</a></li>
+          <li><a class="" href="/priceLists">Price Lists</a></li>
+          <li><a class="" href="/productId">Product ID</a></li>
+          <!-- <li><a class="" href="/docs">Docs</a></li> -->
+          <li><a class="" href="/portal">Portal</a></li>
+          <!-- <li><a class="" href="/clock">Time Clock</a></li> -->
+          <!-- <li><a class="" href="/sizer">O-Ring Sizer</a></li> -->
+        </ul>
       </div>
-      <div class="text-center mx-2">
-        <h1 class="my-10"><a class="text-4xl sm:text-6xl" href="/<%= url %>"><%= pageName %></a></h1>
+      <div class="navbar-end">
+        <a href="/logout" class="btn px-2">Log Out</a>
       </div>
-    </header>
-
+    </div>
+    <div class="text-end">
+      <p class="m-2"><strong>Logged in as: </strong>
+        <%= user.userName %>
+      </p>
+    </div>
+    <div class="text-center mx-2">
+      <h1 class="my-10"><a class="text-4xl sm:text-6xl" href="/<%= url %>">
+          <%= pageName %>
+        </a></h1>
+    </div>
+  </header>
