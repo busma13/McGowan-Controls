@@ -3,27 +3,32 @@
 @tailwind utilities;
 
 form .btn {
-    background-color: rgb(28, 79, 130);
+  background-color: rgb(28, 79, 130);
 }
 
 td > div {
-    overflow-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* ProductId menu */
 .menu span {
-    display: inline-block;
-    width: 110px;
+  display: inline-block;
+  width: 110px;
 }
 .menu select {
-    display: inline-block;
-    width: 286px;
+  display: inline-block;
+  width: 286px;
+}
+
+.menu li {
+  display: flex;
+  flex-direction: row;
 }
 
 .job-creator-modal-action {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .btn {
-    @apply rounded-full;
+  @apply rounded-full;
 }
