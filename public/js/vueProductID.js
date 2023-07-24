@@ -1,7 +1,12 @@
 const app = Vue.createApp({
   data() {
     return {
-      message: "Hello",
+      manufacturers: [
+        { name: "Danfoss" },
+        { name: "Moog" },
+        { name: "Bosch" },
+        { name: "McGowan Controls" },
+      ],
     };
   },
 });
