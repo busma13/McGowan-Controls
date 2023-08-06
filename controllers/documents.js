@@ -1,19 +1,18 @@
-const Document = require("../models/Document");
-// const PriceListItem = require('../models/PriceListItem')
+const GridFile = require("../models/GridFile");
+const fs = require("fs");
 
 module.exports = {
   getDocuments: async (req, res) => {
     console.log(req.user);
     try {
-      const listItems = await Document.find()
-        .sort({ favorite: "desc" })
-        .collation({ locale: "en", strength: 2 })
-        .sort({ listName: 1 });
-      res.render("priceLists.ejs", {
+      const documentsList = await GridFile.find({}).sort({
+        uploadDate: "desc",
+      });
+      res.render("documents.ejs", {
         user: req.user,
-        pageName: "Price Lists",
-        url: "priceLists",
-        listItems: listItems,
+        pageName: "Documents",
+        url: "docs",
+        listItems: documentsList,
       });
     } catch (err) {
       console.log(err);
@@ -30,16 +29,30 @@ module.exports = {
   //         console.log(err)
   //     }
   // },
-  // createPriceList: async (req, res)=>{
-  //     try{
-  //         console.log(req.body)
-  //         await Document.create({listName: req.body.newListName})
-  //         console.log('Price list has been added!')
-  //         res.redirect('/priceLists')
-  //     }catch(err){
-  //         console.log(err)
-  //     }
-  // },
+  addDocument: async (req, res) => {
+    try {
+      console.log("addDocument request body: ", req.body);
+      console.log("addDocument request files: ", req.files);
+      if (req.files) {
+        const tagsArray = req.body.tags.split(" ");
+        const promises = req.files.map(async (file) => {
+          const fileStream = fs.createReadStream(file.path);
+          const gridFile = new GridFile({
+            filename: file.originalname,
+            metadata: { favorited: false, tags: tagsArray },
+          });
+          await gridFile.upload(fileStream);
+          fs.unlinkSync(file.path);
+        });
+
+        await Promise.all(promises);
+      }
+      console.log("Document added successfully");
+      res.redirect("/docs");
+    } catch (err) {
+      console.log(err);
+    }
+  },
   // createPriceListItem: async (req, res)=>{
   //     try{
   //         console.log(req.body)

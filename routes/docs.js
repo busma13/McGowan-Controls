@@ -2,12 +2,16 @@ const express = require("express");
 const router = express.Router();
 const documentsController = require("../controllers/documents");
 const { ensureAuth } = require("../middleware/auth");
+const upload = require("../middleware/multer");
 
 router.get("/", ensureAuth, documentsController.getDocuments);
 
-// router.get('/:listId', ensureAuth, documentsController.getSinglePriceList)
-
-// router.post('/createPriceList', ensureAuth, documentsController.createPriceList)
+router.post(
+  "/addDocument",
+  ensureAuth,
+  upload.any(),
+  documentsController.addDocument
+);
 
 // router.post('/createPriceListItem/:listId', ensureAuth, documentsController.createPriceListItem)
 
