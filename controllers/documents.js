@@ -18,17 +18,30 @@ module.exports = {
       console.log(err);
     }
   },
-  // getSinglePriceList: async (req,res)=>{
-  //     console.log(req.user)
-  //     try{
-  //         const singleListItems = await PriceListItem.find({priceListId: req.params.listId}).sort('itemName')
-  //         const priceListName = await Document.findById(req.params.listId)
-  //         console.log(singleListItems)
-  //         res.render('singlePriceList.ejs',  { user: req.user, pageName: `Price List - ${priceListName.listName}`, url: `priceLists/${req.params.listId}`, listItems: singleListItems, listId: req.params.listId }) //change priceLists url
-  //     }catch(err){
-  //         console.log(err)
-  //     }
-  // },
+  getSingleDocument: async (req, res) => {
+    console.log(req.user);
+    try {
+      const singleDocument = await GridFile.findById(req.params.documentId);
+
+      if (singleDocument) {
+        res.attachment(singleDocument.filename);
+        singleDocument.downloadStream(res);
+      } else {
+        // file not found
+        res.status(404).json({ error: "file not found" });
+      }
+      // console.log(singleDocument);
+      // res.render("singleDocument.ejs", {
+      //   user: req.user,
+      //   pageName: `${singleDocument.filename}`,
+      //   url: `docs/${req.params.documentId}`,
+      //   documentId: req.params.documentId,
+      //   document: singleDocument.downloadStream(res),
+      // });
+    } catch (err) {
+      console.log(err);
+    }
+  },
   addDocument: async (req, res) => {
     try {
       console.log("addDocument request body: ", req.body);

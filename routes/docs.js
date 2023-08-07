@@ -6,6 +6,8 @@ const upload = require("../middleware/multer");
 
 router.get("/", ensureAuth, documentsController.getDocuments);
 
+router.get("/:documentId", ensureAuth, documentsController.getSingleDocument);
+
 router.post(
   "/addDocument",
   ensureAuth,
