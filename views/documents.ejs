@@ -36,8 +36,8 @@
                 </p>
               </a>
             </div>
-            <button class="btn modal-button document-download-modal-button fa fa-download mx-2"
-              data-id='<%= el._id %>'></button>
+            <button class="btn document-download-button fa fa-download mx-2" data-id='<%= el._id %>'
+              data-filename="<%= el.filename %>"></button>
 
             <button class="btn modal-button document-delete-modal-button fa fa-trash mx-2"
               data-id='<%= el._id %>'></button>
@@ -66,9 +66,9 @@
     </div>
   </div>
 
-  <!-- Modal to confirm list deletion-->
+  <!-- Modal to confirm document deletion-->
   <input type="checkbox" id="delete-document-modal" class="modal-toggle" />
-  <div class="modal modal-bottom sm:modal-middle">
+  <div class="delete-modal modal-bottom sm:modal-middle">
     <div class="modal-box">
       <h3 class="font-bold text-lg">Delete Item</h3>
       <p class="py-4">Are you sure you want to delete this document?</p>
@@ -81,5 +81,6 @@
       </div>
     </div>
   </div>
+
   <script src="../js/documents.js"></script>
   <%- include('partials/footer') -%>

@@ -8,6 +8,12 @@ router.get("/", ensureAuth, documentsController.getDocuments);
 
 router.get("/:documentId", ensureAuth, documentsController.getSingleDocument);
 
+router.get(
+  "/download/:documentId",
+  ensureAuth,
+  documentsController.getSingleDocumentForDownload
+);
+
 router.post(
   "/addDocument",
   ensureAuth,
