@@ -123,15 +123,15 @@ module.exports = {
   //         console.log(err)
   //     }
   // },
-  // deletePriceList: async (req, res)=>{
-  //     try{
-  //         await Document.findByIdAndRemove(req.params.listId)
-  //         console.log('Deleted Price List')
-  //         res.redirect('/priceLists')
-  //     }catch(err){
-  //         console.log(err)
-  //     }
-  // },
+  deleteDocument: async (req, res) => {
+    try {
+      await GridFile.findByIdAndRemove(req.params.documentId);
+      console.log("Document Deleted");
+      res.redirect("/docs");
+    } catch (err) {
+      console.log(err);
+    }
+  },
   // deletePriceListItem: async (req, res)=>{
   //     try{
   //         await PriceListItem.findByIdAndRemove(req.params.itemId)

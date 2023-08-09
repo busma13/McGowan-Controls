@@ -21,7 +21,11 @@ router.post(
 
 // router.put('/editPriceListItem/:listId/:itemId', ensureAuth, documentsController.editPriceListItem)
 
-// router.delete('/deletePriceList/:listId', ensureAuth, documentsController.deletePriceList)
+router.delete(
+  "/deleteDocument/:documentId",
+  ensureAuth,
+  documentsController.deleteDocument
+);
 
 // router.delete('/deletePriceListItem/:listId/:itemId', ensureAuth, documentsController.deletePriceListItem)
 
