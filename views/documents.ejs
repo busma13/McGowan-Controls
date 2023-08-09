@@ -22,7 +22,7 @@
                     <button class="my-2 mx-2 fa fa-star" type="submit"></button>
                     <% } %>
               </form>
-              <a href="/docs/<%= el._id %>">
+              <a href="/docs/<%= el._id %>" target="_blank">
                 <p class='priceListName text-2xl break-all'>
                   <%= el.filename %>
                 </p>
@@ -36,6 +36,7 @@
                 </p>
               </a>
             </div>
+            <button class="btn modal-button list-modal-button fa fa-download mx-2" data-id='<%= el._id %>'></button>
 
             <button class="btn modal-button list-modal-button fa fa-trash mx-2" data-id='<%= el._id %>'></button>
           </li>

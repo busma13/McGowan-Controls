@@ -1,5 +1,6 @@
 const GridFile = require("../models/GridFile");
 const fs = require("fs");
+const getContentTypeFromExt = require("../utils/utils");
 
 module.exports = {
   getDocuments: async (req, res) => {
@@ -19,6 +20,22 @@ module.exports = {
     }
   },
   getSingleDocument: async (req, res) => {
+    // console.log(req.user);
+    try {
+      const singleDocument = await GridFile.findById(req.params.documentId);
+      // console.log(singleDocument);
+
+      if (!singleDocument || singleDocument.length === 0) {
+        res.status(404).json({ error: "file not found" });
+      }
+
+      const documentStream = singleDocument.getDownloadStream();
+      documentStream.pipe(res);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getSingleDocumentForDownload: async (req, res) => {
     console.log(req.user);
     try {
       const singleDocument = await GridFile.findById(req.params.documentId);
@@ -30,14 +47,6 @@ module.exports = {
         // file not found
         res.status(404).json({ error: "file not found" });
       }
-      // console.log(singleDocument);
-      // res.render("singleDocument.ejs", {
-      //   user: req.user,
-      //   pageName: `${singleDocument.filename}`,
-      //   url: `docs/${req.params.documentId}`,
-      //   documentId: req.params.documentId,
-      //   document: singleDocument.downloadStream(res),
-      // });
     } catch (err) {
       console.log(err);
     }
@@ -49,10 +58,18 @@ module.exports = {
       if (req.files) {
         const tagsArray = req.body.tags.split(" ");
         const promises = req.files.map(async (file) => {
+          const ext = file.originalname.substring(
+            file.originalname.lastIndexOf(".") + 1
+          );
+          const contentType = getContentTypeFromExt(ext);
           const fileStream = fs.createReadStream(file.path);
           const gridFile = new GridFile({
             filename: file.originalname,
-            metadata: { favorited: false, tags: tagsArray },
+            metadata: {
+              contentType: contentType,
+              favorited: false,
+              tags: tagsArray,
+            },
           });
           await gridFile.upload(fileStream);
           fs.unlinkSync(file.path);
