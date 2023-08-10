@@ -29,7 +29,9 @@ module.exports = {
       if (!singleDocument || singleDocument.length === 0) {
         res.status(404).json({ error: "file not found" });
       }
-
+      const contentType = mime.getType(singleDocument.filename);
+      console.log("Content-Type: ", contentType);
+      res.setHeader("Content-Type", contentType);
       const documentStream = singleDocument.getDownloadStream();
       documentStream.pipe(res);
     } catch (err) {
@@ -43,6 +45,7 @@ module.exports = {
 
       if (singleDocument) {
         const contentType = mime.getType(singleDocument.filename);
+        console.log("Content-Type: ", contentType);
         res.setHeader("Content-Type", contentType);
         res.attachment(singleDocument.filename);
         singleDocument.downloadStream(res);
