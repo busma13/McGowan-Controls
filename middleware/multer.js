@@ -1,4 +1,7 @@
 const multer = require("multer");
 const path = require("path");
+const os = require("os");
 
-module.exports = multer({ dest: path.join(__dirname, ".") });
+const tempDir = os.tmpdir();
+
+module.exports = multer({ dest: path.join(tempDir, ".") });
