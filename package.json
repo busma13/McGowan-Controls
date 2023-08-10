@@ -20,6 +20,7 @@
     "express-session": "^1.17.1",
     "gridfile": "^1.1.4",
     "method-override": "^3.0.0",
+    "mime": "^3.0.0",
     "mongodb": "^3.6.5",
     "mongoose": "^5.12.3",
     "mongoose-sequence": "^5.3.1",

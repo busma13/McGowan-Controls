@@ -1,6 +1,7 @@
 const GridFile = require("../models/GridFile");
 const fs = require("fs");
-const getContentTypeFromExt = require("../utils/utils");
+const mime = require("mime");
+// const getContentTypeFromExt = require("../utils/utils");
 
 module.exports = {
   getDocuments: async (req, res) => {
@@ -41,6 +42,8 @@ module.exports = {
       const singleDocument = await GridFile.findById(req.params.documentId);
 
       if (singleDocument) {
+        const contentType = mime.getType(singleDocument.filename);
+        res.setHeader("Content-Type", contentType);
         res.attachment(singleDocument.filename);
         singleDocument.downloadStream(res);
       } else {
@@ -58,10 +61,7 @@ module.exports = {
       if (req.files) {
         const tagsArray = req.body.tags.split(" ");
         const promises = req.files.map(async (file) => {
-          const ext = file.originalname.substring(
-            file.originalname.lastIndexOf(".") + 1
-          );
-          const contentType = getContentTypeFromExt(ext);
+          const contentType = mime.getType(file.originalname);
           const fileStream = fs.createReadStream(file.path);
           const gridFile = new GridFile({
             filename: file.originalname,

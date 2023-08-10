@@ -4,7 +4,7 @@ const documentDeleteButtons = document.querySelectorAll(
 const documentDownloadButtons = document.querySelectorAll(
   ".document-download-button"
 );
-const deleteModal = document.querySelector(".delete-modal");
+const deleteModal = document.querySelector(".modal");
 
 documentDeleteButtons.forEach((modal) =>
   modal.addEventListener("click", passIdToDocumentDeleteModal)
